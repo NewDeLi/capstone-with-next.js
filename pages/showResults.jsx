@@ -6,10 +6,9 @@ const ShowResults = () => {
     return (
         <>
             <Head><title>Results</title></Head>
-            <div>
-                <Header pageName="Results" />
-                <Navigation />
-            </div>
+
+            <Header pageName={"Results"} />
+            <Navigation />
         </>
     )
 };

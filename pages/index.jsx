@@ -7,11 +7,9 @@ export default function Home() {
   return (
     <>
       <Head><title>Home</title></Head>
-      <div>
-        <Header pageName="Decisionmaker for groups" />
-        
-        <Navigation/>
-      </div>
+
+      <Header pageName={"Decisionmaker"} />
+      <Navigation />
     </>
   )
-}
+};

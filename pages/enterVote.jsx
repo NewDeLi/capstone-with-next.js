@@ -6,10 +6,9 @@ const EnterVote = () => {
     return (
         <>
             <Head><title>Vote</title></Head>
-            <div>
-                <Header pageName="Vote for your Option" />
-                <Navigation />
-            </div>
+
+            <Header pageName={"Vote"} />
+            <Navigation />
         </>
     )
 };

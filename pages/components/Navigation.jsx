@@ -1,29 +1,42 @@
 import Link from "next/link";
-
+import styled from "styled-components";
 
 export const Navigation = () => {
     return (
-        <div>
+        <StyledNav>
             <li>
                 <Link href="/">
-                    <a>home</a>
+                    <a> <img src="/Icon/Home.svg" alt="home" width="50px" height="50px"/></a>
                 </Link>
             </li>
             <li>
-                <Link href="/addCard">
-                    <a>create</a>
+                <Link href={"/addCard"}>
+                    <a><img src="/Icon/Plus.svg" alt="add" width="50px" height="50px"/></a>
                 </Link>
             </li>
             <li>
                 <Link href="/enterVote">
-                    <a>vote</a>
+                    <a><img src="/Icon/vote.png" alt="vote" width="50px" height="50px"/></a>
                 </Link>
             </li>
             <li>
                 <Link href="/showResults">
-                    <a>results</a>
+                    <a><img src="/Icon/Results.svg" alt="results" width="50px" height="50px"/></a>
                 </Link>
             </li>
-        </div>
+        </StyledNav>
     )
 };
+
+const StyledNav = styled.nav`
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 1rem;
+list-style-type: none;
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+border-top: 0.5px solid black;
+`

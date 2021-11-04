@@ -5,11 +5,10 @@ import { Navigation } from "./components/Navigation";
 const AddCard = () => {
     return (
         <>
-            <Head><title>Add</title></Head>
-            <div>
-                <Header pageName="Add your Options" />
-                <Navigation />
-            </div>
+            <Head><title>Create</title></Head>
+           
+            <Header pageName={"Create"} />
+            <Navigation />
         </>
     )
 };
