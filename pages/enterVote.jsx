@@ -3,13 +3,15 @@ import { Header } from "./components/Header";
 import { Navigation } from "./components/Navigation";
 
 const EnterVote = () => {
-    return (
-        <>
-            <Head><title>Vote</title></Head>
+  return (
+    <>
+      <Head>
+        <title>Vote</title>
+      </Head>
 
-            <Header pageName={"Vote"} />
-            <Navigation />
-        </>
-    )
+      <Header pageName={"Vote"} />
+      <Navigation />
+    </>
+  );
 };
 export default EnterVote;
