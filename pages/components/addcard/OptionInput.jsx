@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const OptionInput = ({ children }) => {
-  console.log(children);
+export const OptionInput = ({ handleRemoveInput }) => {
   return (
     <>
       <StyledList>
@@ -10,6 +9,7 @@ export const OptionInput = ({ children }) => {
           alt="delete option"
           width="30px"
           height="30px"
+          onClick={handleRemoveInput}
         />
         <StyledForm>
           <input type="text" name="newQption" placeholder="write option here" />

@@ -1,10 +1,11 @@
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useLocalStorage } from "../utils/localStorage";
 
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState("");
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useLocalStorage("question","");
   const [roomName, setRoomName] = useState("");
   const router = useRouter();
 

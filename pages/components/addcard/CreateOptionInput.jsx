@@ -4,7 +4,6 @@ export const CreateOptionInput = ({ onCreate }) => {
   return (
     <>
       <StyledForm
-        className="CreateTodo"
         onSubmit={(event) => {
           onCreate();
           event.preventDefault();

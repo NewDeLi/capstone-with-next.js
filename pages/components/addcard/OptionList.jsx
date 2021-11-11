@@ -4,11 +4,21 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../../../utils/localStorage";
 
 export const OptionList = () => {
-  const [optionInputs, setOptionsInput] = useLocalStorage("options", []);
+  const [optionInputs, setOptionsInput] = useLocalStorage("optionInput", []);
 
   const mapIt = optionInputs.map((option) => {
     return (
-      <OptionInput id={option.id} key={option.id}>
+      <OptionInput
+        id={option.id}
+        key={option.id}
+        handleRemoveInput={() => {
+          const id = option.id;
+          setOptionsInput(
+            optionInputs.filter((optionInputs) => optionInputs.id !== id)
+          );
+        }}
+        optionInputs={optionInputs.id}
+      >
         {option}
       </OptionInput>
     );
@@ -16,7 +26,6 @@ export const OptionList = () => {
 
   return (
     <>
-      <OptionInput />
       <ul>
         {mapIt}
         <CreateOptionInput
@@ -24,6 +33,7 @@ export const OptionList = () => {
             const id = uuidv4();
             const newOptionInput = {
               id,
+              name:"optionInput"
             };
             setOptionsInput([...optionInputs, newOptionInput]);
           }}
