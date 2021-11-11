@@ -17,11 +17,12 @@ export const Header = ({ pageName }) => {
 //styled-components
 
 const StyledHeader = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-border-bottom: 0.5px solid black;
-font-size: 1.2rem;
-background-color: white;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.5px solid black;
+  font-size: 1.2rem;
+  background-color: white;
+  position: sticky;
+`;

@@ -45,15 +45,16 @@ export const Navigation = () => {
 //styled-components
 
 const StyledNav = styled.nav`
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 1rem;
-list-style-type: none;
-position: fixed;
-bottom: 0;
-left: 0;
-right: 0;
-border-top: 0.5px solid black;
-background-color: white;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  list-style-type: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 0.5px solid black;
+  background-color: white;
+  padding: 1rem;
+`;
