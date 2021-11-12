@@ -5,9 +5,9 @@ import styled from "styled-components";
 export default function Home({
   handleQuestion,
   handleRoomNameChange,
-    handleRoomChange,
-    username,
-  roomName
+  handleRoomChange,
+  username,
+  roomName,
 }) {
   return (
     <>

@@ -21,4 +21,4 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-text-stroke-color: black;
     letter-spacing: 1px;
   };
-`
+`;

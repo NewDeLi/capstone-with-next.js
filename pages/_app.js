@@ -5,17 +5,17 @@ import { useLocalStorage } from "../utils/localStorage";
 
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState("testuser");
-  const [question, setQuestion] = useLocalStorage("question","");
-  const [roomName, setRoomName] = useState("12345");//12345 test
+  const [question, setQuestion] = useLocalStorage("question", "");
+  const [roomName, setRoomName] = useState("12345"); //12345 test
   const router = useRouter();
 
   const handleLogin = (event) => {
     event.preventDefault();
-    router.push("/home")
-  }
+    router.push("/home");
+  };
   const handleRoomChange = (event) => {
     event.preventDefault();
-    router.push(`/room/${roomName}`) 
+    router.push(`/room/${roomName}`);
   };
 
   return (
@@ -37,4 +37,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-

@@ -2,10 +2,7 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
 
-export default function Login({
-  handleUserNameChange,
-  handleLogin
-}) {
+export default function Login({ handleUserNameChange, handleLogin }) {
   return (
     <>
       <Head>
@@ -13,15 +10,15 @@ export default function Login({
       </Head>
 
       <Header pageName={"Decisionmaker"} />
-        <StyledForm onSubmit={handleLogin}>
-          👤
-          <input
-            type="text"
-            placeholder="enter your username..."
-            onChange={handleUserNameChange}
-          />
-          <StyledButton type="submit">Submit</StyledButton>
-        </StyledForm>
+      <StyledForm onSubmit={handleLogin}>
+        👤
+        <input
+          type="text"
+          placeholder="enter your username..."
+          onChange={handleUserNameChange}
+        />
+        <StyledButton type="submit">Submit</StyledButton>
+      </StyledForm>
     </>
   );
 }
