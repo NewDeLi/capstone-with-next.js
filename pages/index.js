@@ -1,63 +1,27 @@
 import Head from "next/head";
 import { Header } from "../components/Header";
-import { Navigation } from "../components/Navigation";
 import styled from "styled-components";
 
-export default function Home({
+export default function Login({
   handleUserNameChange,
-  handleQuestion,
-  handleRoomNameChange,
-  handleRoomChange,
+  handleLogin
 }) {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Login</title>
       </Head>
 
       <Header pageName={"Decisionmaker"} />
-
-      <StyledForm onSubmit={handleRoomChange}>
-        <div>
+        <StyledForm onSubmit={handleLogin}>
           👤
           <input
             type="text"
             placeholder="enter your username..."
             onChange={handleUserNameChange}
           />
-        </div>
-        <div>
-          🤔
-          <input
-            type="text"
-            name="newQuestion"
-            placeholder="add question here"
-            onChange={handleQuestion}
-          />
-        </div>
-        <StyledButton type="submit">Create</StyledButton>
-      </StyledForm>
-      <StyledForm onSubmit={handleRoomChange}>
-        <div>
-          👤
-          <input
-            type="text"
-            placeholder="enter your username..."
-            onChange={handleUserNameChange}
-          />
-        </div>
-        <div>
-          🤝
-          <input
-            type="text"
-            name="newRoom"
-            placeholder="add room id here"
-            onChange={handleRoomNameChange}
-          />
-        </div>
-        <StyledButton type="submit">Join</StyledButton>
-      </StyledForm>
-      <Navigation />
+          <StyledButton type="submit">Submit</StyledButton>
+        </StyledForm>
     </>
   );
 }
@@ -66,23 +30,21 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border-radius: 5px;
-  font-size: 2rem;
-  margin-top: 1rem;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  font-size: 3rem;
+  background-color: white;
+  margin: 20vh auto;
+  padding: 5rem 0.5rem;
   input {
-    height: 3rem;
+    height: 5rem;
+    width: 70%;
     border-radius: 5px;
   }
 `;
 const StyledButton = styled.button`
   border-radius: 15px;
   font-size: 1.5rem;
-  width: 50%;
+  width: 70%;
   margin: 1rem auto;
 `;
