@@ -6,12 +6,12 @@ import { useLocalStorage } from "../utils/localStorage";
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useLocalStorage("question","");
-  const [roomName, setRoomName] = useState("");
+  const [roomName, setRoomName] = useState("12345");//12345 test
   const router = useRouter();
 
   const handleRoomChange = (event) => {
     event.preventDefault();
-    router.push("/addCard");
+    router.push(`/room/${roomName}`) 
   };
 
   return (
@@ -32,3 +32,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+

@@ -1,10 +1,10 @@
 import { CreateOptionInput } from "./CreateOptionInput";
 import { OptionInput } from "./OptionInput";
 import { v4 as uuidv4 } from "uuid";
-import { useLocalStorage } from "../../../utils/localStorage";
+import { useLocalStorage } from "../../utils/localStorage";
 
 export const OptionList = () => {
-  const [optionInputs, setOptionsInput] = useLocalStorage("optionInput", []);
+  const [optionInputs, setOptionsInput] = useLocalStorage("optionInputs",[]);
 
   const mapIt = optionInputs.map((option) => {
     return (

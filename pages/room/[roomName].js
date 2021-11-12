@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { Header } from "./components/Header";
-import { Navigation } from "./components/Navigation";
-import { OptionList } from "./components/addcard/OptionList";
+import { Header } from "../../components/Header";
+import { Navigation } from "../../components/Navigation";
+import { OptionList } from "../../components/addcard/OptionList";
 //import Pusher from "pusher-js";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const AddCard = ({ /*username,*/ question }) => {
   /*const pusher = new Pusher(process.env.NEXT_PUBLIC_key, {
@@ -11,7 +12,8 @@ const AddCard = ({ /*username,*/ question }) => {
     authEndpoint: "api/pusher/auth",
     auth: { params: { username } },
   });*/
-
+  const router = useRouter();
+  console.log(router.query);
   return (
     <>
       <Head>
