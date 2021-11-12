@@ -7,7 +7,6 @@ export const Navigation = () => {
       <li>
         <Link href="/">
           <a>
-            {" "}
             <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
           </a>
         </Link>

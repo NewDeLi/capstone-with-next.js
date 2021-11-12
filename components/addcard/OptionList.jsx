@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../../utils/localStorage";
 
 export const OptionList = () => {
-  const [optionInputs, setOptionsInput] = useLocalStorage("optionInputs",[]);
+  const [optionInputs, setOptionsInput] = useLocalStorage("optionInputs", []);
 
   const mapIt = optionInputs.map((option) => {
     return (
@@ -33,7 +33,7 @@ export const OptionList = () => {
             const id = uuidv4();
             const newOptionInput = {
               id,
-              name:"optionInput"
+              name: "optionInput",
             };
             setOptionsInput([...optionInputs, newOptionInput]);
           }}
