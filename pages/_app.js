@@ -6,7 +6,7 @@ import { useLocalStorage } from "../utils/localStorage";
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState("testuser");
   const [question, setQuestion] = useLocalStorage("question", "");
-  const [roomName, setRoomName] = useState("12345"); //12345 test
+  const [roomName, setRoomName] = useState("12345");
   const router = useRouter();
 
   const handleLogin = (event) => {

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Home({
   handleQuestion,
@@ -14,7 +15,7 @@ export default function Home({
       <Head>
         <title>Home</title>
       </Head>
-      <Header pageName={"Decisionmaker"} />
+      <Header pageName={"Rooms"} />
       <StyledMain>
         <h1>Welcome {username}!</h1>
         <h2>
@@ -43,17 +44,22 @@ export default function Home({
           <StyledButton type="submit">Join</StyledButton>
         </StyledForm>
       </StyledMain>
+      <Link href="/">
+        <a>
+          <img src="/Icon/logout.svg" alt="home" width="50px" height="50px" />
+        </a>
+      </Link>
     </>
   );
 }
 const StyledMain = styled.main`
   background-color: white;
-  padding: 5rem 0.5rem;
+  padding: 3vh 1vw;
   h2 {
     border: 1px solid black;
     border-radius: 5px;
     padding: 2vh 0;
-    margin: 6vh 6vw 6vh 6vw;
+    margin: 6vh 6vw;
     background-color: red;
   }
 `;
