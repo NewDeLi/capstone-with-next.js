@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-export const OptionInput = ({ handleRemoveInput}) => {
+export const OptionInput = ({ handleRemoveInput }) => {
   const { register, handleSubmit } = useForm();
   let userOptions = [];
   const onSubmit = (data) => {
-    const userOption= JSON.stringify(data);
+    const userOption = JSON.stringify(data);
     userOptions.push(userOption);
     console.log(userOptions);
   };
-  
+
   return (
     <>
       <StyledList>
