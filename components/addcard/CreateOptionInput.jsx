@@ -3,23 +3,18 @@ import styled from "styled-components";
 export const CreateOptionInput = ({ onCreate }) => {
   return (
     <>
-      <StyledForm
-        onSubmit={(event) => {
+      <StyledButton
+        onClick={(event) => {
           onCreate();
           event.preventDefault();
         }}
+        type="add"
       >
-        <StyledButton type="submit">Add Option</StyledButton>
-      </StyledForm>
+        Add Option
+      </StyledButton>
     </>
   );
 };
-
-const StyledForm = styled.form`
-  input {
-    height: 2rem;
-  }
-`;
 
 const StyledButton = styled.button`
   border-radius: 15px;
