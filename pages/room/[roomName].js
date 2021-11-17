@@ -1,40 +1,43 @@
-import Head from "next/head";
-import { Header } from "../../components/Header";
-import { Navigation } from "../../components/Navigation";
-import { OptionList } from "../../components/addcard/OptionList";
-//import Pusher from "pusher-js";
+import { OptionFormList } from "../../components/OptionFormList";
+import VoteCard from "../../components/VoteCard";
+import Result from "../../components/Result";
+import Link from "next/link";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-const AddCard = ({ /*username,*/ question }) => {
-  /*const pusher = new Pusher(process.env.NEXT_PUBLIC_key, {
-    cluster: "eu",
-    authEndpoint: "api/pusher/auth",
-    auth: { params: { username } },
-  });*/
+const AddCard = ({}) => {
   const router = useRouter();
   console.log(router.query);
   return (
     <>
-      <Head>
-        <title>Create</title>
-      </Head>
+      <OptionFormList />
 
-      <Header pageName={"Create"} />
+      <VoteCard />
 
-      <StyledH3>{question}❓</StyledH3>
+      <Result />
 
-      <OptionList />
-
-      <Navigation />
+      <StyledNav>
+        <Link href="/home">
+          <a>
+            <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
+          </a>
+        </Link>
+      </StyledNav>
     </>
   );
 };
 export default AddCard;
 
-const StyledH3 = styled.h3`
-  border: 1px solid black;
-  border-radius: 15px;
-  margin: 1rem 2rem;
-  background-color: white;
+const StyledNav = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  margin: 0 auto;
+  img {
+    border: 1px solid black;
+    background-color: orange;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin: 3rem 3.1rem;
+  }
 `;
