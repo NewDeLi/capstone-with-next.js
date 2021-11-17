@@ -17,50 +17,54 @@ export default function Home({
       </Head>
       <Header pageName={"Rooms"} />
       <StyledMain>
-        <h1>Welcome {username}!</h1>
         <h2>
-          Your Room-ID: <br />
+          {username} Room-ID: <br />
           {roomName}
         </h2>
 
         <StyledForm onSubmit={handleRoomChange}>
-          🤔
-          <input
-            type="text"
-            name="newQuestion"
-            placeholder="add question here"
-            onChange={handleQuestion}
-          />
+          <label>
+            <p>🤔</p>
+            <input
+              type="text"
+              name="newQuestion"
+              placeholder="add question here"
+              onChange={handleQuestion}
+            />
+          </label>
           <StyledButton type="submit">Create</StyledButton>
         </StyledForm>
         <StyledForm onSubmit={handleRoomChange}>
-          🤝
-          <input
-            type="text"
-            name="newRoom"
-            placeholder="add room id here"
-            onChange={handleRoomNameChange}
-          />
+          <label>
+            <p>🤝</p>
+            <input
+              type="text"
+              name="newRoom"
+              placeholder="add room id here"
+              onChange={handleRoomNameChange}
+            />
+          </label>
           <StyledButton type="submit">Join</StyledButton>
         </StyledForm>
       </StyledMain>
-      <Link href="/">
-        <a>
-          <img src="/Icon/logout.svg" alt="home" width="50px" height="50px" />
-        </a>
-      </Link>
+      <StyledNav>
+        <Link href="/">
+          <a>
+            <img src="/Icon/logout.svg" alt="home" width="50px" height="50px" />
+          </a>
+        </Link>
+      </StyledNav>
     </>
   );
 }
 const StyledMain = styled.main`
-  background-color: white;
   padding: 3vh 1vw;
   h2 {
     border: 1px solid black;
     border-radius: 5px;
     padding: 2vh 0;
     margin: 6vh 6vw;
-    background-color: red;
+    background-color: white;
   }
 `;
 const StyledForm = styled.form`
@@ -73,13 +77,27 @@ const StyledForm = styled.form`
   input {
     height: 3rem;
     border-radius: 5px;
-    width: 50%;
+    width: 50vw;
   }
 `;
 const StyledButton = styled.button`
   border-radius: 15px;
   font-size: 1.5rem;
-  width: 50%;
+  width: 52%;
   margin: 1rem auto;
-  background-color: lightgreen;
+  background-color: orange;
+  color: white;
+`;
+const StyledNav = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  margin: 0 auto;
+  img {
+    border: 1px solid black;
+    background-color: orange;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin: 3rem 3.1rem;
+  }
 `;

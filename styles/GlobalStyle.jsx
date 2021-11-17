@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #ff0000ab;
     text-decoration: none;
   };
-  h1,h2{
+  h1{
     color: white;
     -webkit-text-stroke-width: 2.5px;
     -webkit-text-stroke-color: black;
