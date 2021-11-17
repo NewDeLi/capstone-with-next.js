@@ -8,11 +8,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "js": "^0.1.0",
     "next": "12.0.2",
+    "pusher": "^5.0.0",
+    "pusher-js": "^7.0.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.19.5",
+    "react-router-dom": "^6.0.2",
+    "styled-components": "^5.3.3",
+    "uuidv4": "^6.2.12"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.13.3",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.2"
   }
