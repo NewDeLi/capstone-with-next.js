@@ -29,7 +29,7 @@ export const Navigation = () => {
         <Link href="/showResults">
           <a>
             <img
-              src="/Icon/Results.svg"
+              src="/Icon/results.svg"
               alt="results"
               width="50px"
               height="50px"

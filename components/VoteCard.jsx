@@ -16,7 +16,7 @@ export default function VoteCard({ question }) {
   );
 }
 
-const StyledP = styled.P`
+const StyledP = styled.p`
   border: 1px solid black;
   border-radius: 15px;
   margin: 1rem 2rem;

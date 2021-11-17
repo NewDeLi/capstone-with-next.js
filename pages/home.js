@@ -24,23 +24,28 @@ export default function Home({
         </h2>
 
         <StyledForm onSubmit={handleRoomChange}>
-          🤔
-          <input
-            type="text"
-            name="newQuestion"
-            placeholder="add question here"
-            onChange={handleQuestion}
-          />
+          <label>
+            <p>🤔</p>
+            <input
+              type="text"
+              name="newQuestion"
+              placeholder="add question here"
+              onChange={handleQuestion}
+            />
+          </label>
+
           <StyledButton type="submit">Create</StyledButton>
         </StyledForm>
         <StyledForm onSubmit={handleRoomChange}>
-          🤝
-          <input
-            type="text"
-            name="newRoom"
-            placeholder="add room id here"
-            onChange={handleRoomNameChange}
-          />
+          <label>
+            <p>🤝</p>
+            <input
+              type="text"
+              name="newRoom"
+              placeholder="add room id here"
+              onChange={handleRoomNameChange}
+            />
+          </label>
           <StyledButton type="submit">Join</StyledButton>
         </StyledForm>
       </StyledMain>
@@ -73,7 +78,7 @@ const StyledForm = styled.form`
   input {
     height: 3rem;
     border-radius: 5px;
-    width: 50%;
+    width: 100%;
   }
 `;
 const StyledButton = styled.button`

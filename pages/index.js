@@ -9,14 +9,16 @@ export default function Login({ handleUserNameChange, handleLogin }) {
         <title>Login</title>
       </Head>
 
-      <Header pageName={"Decisionmaker"} />
+      <Header pageName={"Decisions"} />
       <StyledForm onSubmit={handleLogin}>
-        👤
-        <input
-          type="text"
-          placeholder="enter your username..."
-          onChange={handleUserNameChange}
-        />
+        <label>
+          <p>👤</p>
+          <input
+            type="text"
+            placeholder="enter your username..."
+            onChange={handleUserNameChange}
+          />
+        </label>
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
     </>
@@ -35,13 +37,13 @@ const StyledForm = styled.form`
   padding: 5rem 0.5rem;
   input {
     height: 5rem;
-    width: 70%;
+    width: 100%;
     border-radius: 5px;
   }
 `;
 const StyledButton = styled.button`
   border-radius: 15px;
   font-size: 1.5rem;
-  width: 70%;
+  width: 50%;
   margin: 1rem auto;
 `;
