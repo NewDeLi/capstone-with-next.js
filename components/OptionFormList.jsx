@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { useState } from "react";
+import Head from "next/head";
+import { Header } from "./Header";
 
-export const OptionList = () => {
+export const OptionFormList = ({ question }) => {
   const [inputs, setInputs] = useState([{ id: uuidv4(), value: "" }]);
 
   const handleOnChange = (event, id) => {
@@ -22,10 +24,21 @@ export const OptionList = () => {
   const handleRemove = (id) => {
     setInputs(inputs.filter((input) => input.id !== id));
   };
+  const handleSubmit = () => {
+    console.log(inputs);
+  };
 
   return (
     <div>
-      <form>
+      <Head>
+        <title>Create</title>
+      </Head>
+
+      <Header pageName={"Create"} />
+      <div>
+        <StyledP>{question}?</StyledP>
+      </div>
+      <form onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
             return (
@@ -63,6 +76,16 @@ export const OptionList = () => {
     </div>
   );
 };
+const StyledP = styled.p`
+  font-size: 1.5rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 1rem auto;
+  padding: auto;
+  background-color: white;
+  height: 100%;
+  width: 70%;
+`;
 const StyledList = styled.li`
   display: flex;
   align-items: center;
@@ -70,7 +93,6 @@ const StyledList = styled.li`
   gap: 1rem;
   margin: 2rem;
   font-size: 1.5rem;
-  z-index: 2;
   input {
     height: 6vh;
     width: 100%;

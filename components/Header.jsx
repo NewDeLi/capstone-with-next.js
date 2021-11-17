@@ -21,8 +21,9 @@ const StyledHeader = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-bottom: 0.5px solid black;
+  border: 0.5px solid black;
+  border-radius: 15px;
   font-size: 1.2rem;
-  background-color: white;
-  position: sticky;
+  background-color: orange;
+  margin: 2vh 10vw;
 `;

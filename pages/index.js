@@ -9,7 +9,7 @@ export default function Login({ handleUserNameChange, handleLogin }) {
         <title>Login</title>
       </Head>
 
-      <Header pageName={"Decisionmaker"} />
+      <Header pageName={"Decisions"} />
       <StyledForm onSubmit={handleLogin}>
         👤
         <input

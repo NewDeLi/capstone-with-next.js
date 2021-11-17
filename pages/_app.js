@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
     event.preventDefault();
     router.push(`/room/${roomName}`);
   };
-
+  
   return (
     <>
       <GlobalStyle />
