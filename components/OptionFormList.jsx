@@ -1,12 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
+import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import Head from "next/head";
 import { Header } from "./Header";
 
-export const OptionFormList = ({ question }) => {
-  const [inputs, setInputs] = useState([{ id: uuidv4(), value: "" }]);
-
+export const OptionFormList = ({
+  question,
+  inputs,
+  setInputs,
+  showCreate,
+  setShowCreate,
+}) => {
+  const handleToggle = () => {
+    setShowCreate(!showCreate);
+  };
   const handleOnChange = (event, id) => {
     const value = event.target.value;
     const foundInput = inputs.find((input) => input.id === id);
@@ -24,10 +31,11 @@ export const OptionFormList = ({ question }) => {
   const handleRemove = (id) => {
     setInputs(inputs.filter((input) => input.id !== id));
   };
-  const handleSubmit = () => {
-    console.log(inputs);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setInputs([...inputs]);
+    handleToggle();
   };
-
   return (
     <div>
       <Head>
@@ -36,9 +44,9 @@ export const OptionFormList = ({ question }) => {
 
       <Header pageName={"Create"} />
       <div>
-        <StyledP>{question}?</StyledP>
+        <StyledP>{question}</StyledP>
       </div>
-      <form onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
             return (
@@ -54,7 +62,7 @@ export const OptionFormList = ({ question }) => {
                   <ScreenReaderOnly>New option</ScreenReaderOnly>
                   <input
                     type="text"
-                    name="newOption"
+                    name="newVoteItem"
                     placeholder="      write option here"
                     onChange={(event) => handleOnChange(event, input.id)}
                     value={input.value}
@@ -71,8 +79,8 @@ export const OptionFormList = ({ question }) => {
             );
           })}
         </ul>
-        <StyledButton type="submit">Vote</StyledButton>
-      </form>
+        <StyledButton type="submit">vote</StyledButton>
+      </StyledForm>
     </div>
   );
 };
@@ -85,6 +93,14 @@ const StyledP = styled.p`
   background-color: white;
   height: 100%;
   width: 70%;
+`;
+const StyledForm = styled.form`
+  overflow: auto;
+  height: 60vh;
+  &:hover,
+  &:active {
+    visibility: visible;
+  }
 `;
 const StyledList = styled.li`
   display: flex;
