@@ -5,7 +5,7 @@ import { useLocalStorage } from "../utils/localStorage";
 
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState("testuser");
-  const [question, setQuestion] = useLocalStorage("question", "");
+  const [question, setQuestion] = useState("question", "");
   const [roomName, setRoomName] = useState("12345");
   const router = useRouter();
 
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
     event.preventDefault();
     router.push(`/room/${roomName}`);
   };
-  
+
   return (
     <>
       <GlobalStyle />
