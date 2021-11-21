@@ -13,18 +13,17 @@ export default function VoteCard({ question, inputs }) {
 
       <Header pageName={"Vote"} />
       <StyledP>{question}</StyledP>
-
-      {inputs.map((voteListItem) => {
-        return (
-          <ul key={voteListItem.id}>
-            <ListItem>
+      <ul>
+        {inputs.map((voteListItem) => {
+          return (
+            <ListItem key={voteListItem.id}>
               <button>👎</button>
               {voteListItem.value}
               <button>👍</button>
             </ListItem>
-          </ul>
-        );
-      })}
+          );
+        })}
+      </ul>
     </div>
   );
 }

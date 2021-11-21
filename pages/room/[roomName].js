@@ -8,9 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const AddCard = ({ question }) => {
   const [inputs, setInputs] = useState([{ id: uuidv4(), value: "" }]);
-  const [voteList, setVoteList] = useState([{ id: uuidv4(), value: "" }]);
-
   const [showCreate, setShowCreate] = useState(true);
+
   if (showCreate) {
     return (
       <>
@@ -18,8 +17,6 @@ const AddCard = ({ question }) => {
           <OptionFormList
             inputs={inputs}
             setInputs={setInputs}
-            voteList={voteList}
-            setVoteList={setVoteList}
             question={question}
             showCreate={showCreate}
             setShowCreate={setShowCreate}
@@ -38,7 +35,7 @@ const AddCard = ({ question }) => {
   return (
     <>
       <StyledDiv>
-        <VoteCard inputs={inputs} voteList={voteList} question={question} />
+        <VoteCard inputs={inputs} question={question} />
       </StyledDiv>
       <StyledNav>
         <Link href="/home">

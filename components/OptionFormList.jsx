@@ -63,7 +63,7 @@ export const OptionFormList = ({
                   <input
                     type="text"
                     name="newVoteItem"
-                    placeholder="      write option here"
+                    placeholder="write option here"
                     onChange={(event) => handleOnChange(event, input.id)}
                     value={input.value}
                   />
