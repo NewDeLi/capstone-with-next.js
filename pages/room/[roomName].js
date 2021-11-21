@@ -3,25 +3,40 @@ import VoteCard from "../../components/VoteCard";
 import Result from "../../components/Result";
 import Link from "next/link";
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const AddCard = ({}) => {
-  const router = useRouter();
-  console.log(router.query);
+const AddCard = ({ question }) => {
+  const [inputs, setInputs] = useState([{ id: uuidv4(), value: "" }]);
+  const [showCreate, setShowCreate] = useState(true);
+
+  if (showCreate) {
+    return (
+      <>
+        <StyledDiv>
+          <OptionFormList
+            inputs={inputs}
+            setInputs={setInputs}
+            question={question}
+            showCreate={showCreate}
+            setShowCreate={setShowCreate}
+          />
+        </StyledDiv>
+        <StyledNav>
+          <Link href="/home">
+            <a>
+              <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
+            </a>
+          </Link>
+        </StyledNav>
+      </>
+    );
+  }
   return (
     <>
       <StyledDiv>
-        <OptionFormList />
+        <VoteCard inputs={inputs} question={question} />
       </StyledDiv>
-
-      <StyledDiv>
-        <VoteCard />
-      </StyledDiv>
-
-      <StyledDiv>
-        <Result />
-      </StyledDiv>
-
       <StyledNav>
         <Link href="/home">
           <a>
@@ -39,6 +54,7 @@ const StyledNav = styled.nav`
   bottom: 0px;
   width: 100%;
   margin: 0 auto;
+  height: 20%;
   img {
     border: 1px solid black;
     background-color: orange;
@@ -48,6 +64,10 @@ const StyledNav = styled.nav`
   }
 `;
 const StyledDiv = styled.div`
-  overflow: auto;
-  height: 60vh;
+  overflow: scroll;
+  height: 80%;
 `;
+
+/* <StyledDiv>
+        <Result />
+      </StyledDiv>*/
