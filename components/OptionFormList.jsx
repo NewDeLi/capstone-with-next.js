@@ -25,6 +25,8 @@ export const OptionFormList = ({
     const newOptionInput = {
       id,
       value: "",
+      countYes: 0,
+      countNo: 0,
     };
     setInputs([...inputs, newOptionInput]);
   };

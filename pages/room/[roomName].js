@@ -1,4 +1,5 @@
 import { OptionFormList } from "../../components/OptionFormList";
+import React from "react";
 import VoteCard from "../../components/VoteCard";
 import Result from "../../components/Result";
 import Link from "next/link";
@@ -7,10 +8,11 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const AddCard = ({ question }) => {
-  const [inputs, setInputs] = useState([{ id: uuidv4(), value: "" }]);
-  const [voteList, setVoteList] = useState([{ id: uuidv4(), value: "" }]);
-
+  const [inputs, setInputs] = useState([
+    { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
+  ]);
   const [showCreate, setShowCreate] = useState(true);
+
   if (showCreate) {
     return (
       <>
@@ -18,8 +20,6 @@ const AddCard = ({ question }) => {
           <OptionFormList
             inputs={inputs}
             setInputs={setInputs}
-            voteList={voteList}
-            setVoteList={setVoteList}
             question={question}
             showCreate={showCreate}
             setShowCreate={setShowCreate}
@@ -38,8 +38,9 @@ const AddCard = ({ question }) => {
   return (
     <>
       <StyledDiv>
-        <VoteCard inputs={inputs} voteList={voteList} question={question} />
+        <VoteCard inputs={inputs} setInputs={setInputs} question={question} />
       </StyledDiv>
+
       <StyledNav>
         <Link href="/home">
           <a>
