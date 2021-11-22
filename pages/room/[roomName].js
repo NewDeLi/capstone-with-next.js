@@ -57,14 +57,7 @@ const StyledNav = styled.nav`
   position: fixed;
   bottom: 0px;
   width: 100%;
-  margin: 0 auto;
-  img {
-    border: 1px solid black;
-    background-color: orange;
-    border-radius: 10px;
-    padding: 0.5rem;
-    margin: 3rem 3.1rem;
-  }
+  margin: 2.5vh auto;
 `;
 const StyledDiv = styled.div`
   overflow: scroll;

@@ -5,18 +5,14 @@ import styled from "styled-components";
 export default function Result({ inputs }) {
   return (
     <>
-      <StyledDiv>
+      <StyledBar>
         <Bar
           data={{
-            labels: inputs.map((input) => {
-              return input.value;
-            }),
+            labels: inputs.map(({ value }) => value),
             datasets: [
               {
                 label: "",
-                data: inputs.map((input) => {
-                  return input.countYes;
-                }),
+                data: inputs.map(({ countYes }) => countYes),
                 backgroundColor: [
                   "#ff638542",
                   "#36a3eb47",
@@ -68,12 +64,12 @@ export default function Result({ inputs }) {
             },
           }}
         />
-      </StyledDiv>
+      </StyledBar>
     </>
   );
 }
 
-const StyledDiv = styled.div`
+const StyledBar = styled.div`
   max-width: 100%;
   width: 90%;
   margin: 1vh auto;
@@ -84,15 +80,3 @@ const StyledDiv = styled.div`
     border: 1px solid black;
   }
 `;
-
-/*{
-  inputs.map((input) => {
-    return (
-      <ul key={input.id}>
-        <li>
-          {input.value}:👍{input.countYes}👎{input.countNo}
-        </li>
-      </ul>
-    );
-  });
-}*/
