@@ -1,4 +1,5 @@
 import { OptionFormList } from "../../components/OptionFormList";
+import React from "react";
 import VoteCard from "../../components/VoteCard";
 import Result from "../../components/Result";
 import Link from "next/link";
@@ -39,6 +40,7 @@ const AddCard = ({ question }) => {
       <StyledDiv>
         <VoteCard inputs={inputs} setInputs={setInputs} question={question} />
       </StyledDiv>
+
       <StyledNav>
         <Link href="/home">
           <a>
@@ -59,7 +61,6 @@ const StyledNav = styled.nav`
 `;
 const StyledDiv = styled.div`
   overflow: scroll;
-  height: 80%;
 `;
 
 /* <StyledDiv>

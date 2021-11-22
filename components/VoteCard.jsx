@@ -30,6 +30,7 @@ export default function VoteCard({ question, inputs, setInputs }) {
         }
       })
     );
+    console.log(inputs);
   };
   return (
     <div>
