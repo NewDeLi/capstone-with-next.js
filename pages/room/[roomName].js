@@ -37,7 +37,7 @@ const AddCard = ({ question }) => {
   return (
     <>
       <StyledDiv>
-        <VoteCard inputs={inputs} question={question} />
+        <VoteCard inputs={inputs} setInputs={setInputs} question={question} />
       </StyledDiv>
       <StyledNav>
         <Link href="/home">
