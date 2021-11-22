@@ -7,16 +7,29 @@ import Result from "./Result";
 
 export default function VoteCard({ question, inputs, setInputs }) {
   const handleVotePlus = (id) => {
-    const foundInput = inputs.find((input) => input.id === id);
-    foundInput.countYes++;
-    setInputs([...inputs]);
+    setInputs(
+      inputs.map((input) => {
+        if (input.id === id) {
+          // Create a *new* object with changes
+          return { ...input, countYes: input.countYes + 1 };
+        } else {
+          // No changes
+          return input;
+        }
+      })
+    );
     console.log(inputs);
   };
   const handleVoteMinus = (id) => {
-    const foundInput = inputs.find((input) => input.id === id);
-    foundInput.countNo++;
-    setInputs([...inputs]);
-    console.log(inputs);
+    setInputs(
+      inputs.map((input) => {
+        if (input.id === id) {
+          return { ...input, countNo: input.countNo + 1 };
+        } else {
+          return input;
+        }
+      })
+    );
   };
   return (
     <div>
@@ -27,14 +40,14 @@ export default function VoteCard({ question, inputs, setInputs }) {
       <Header pageName={"Vote"} />
       <StyledP>{question}</StyledP>
       <ul>
-        {inputs.map((voteListItem) => {
+        {inputs.map(({ id, value }) => {
           return (
-            <ListItem key={voteListItem.id}>
-              <button onClick={() => handleVoteMinus(voteListItem.id)}>
+            <ListItem key={id}>
+              <button onClick={() => handleVoteMinus(id)}>
                 <img src="/Icon/thumbsDown.svg" height="25px" width="25px" />
               </button>
-              <p>{voteListItem.value}</p>
-              <button onClick={() => handleVotePlus(voteListItem.id)}>
+              <p>{value}</p>
+              <button onClick={() => handleVotePlus(id)}>
                 <img src="/Icon/thumbsUp.svg" height="25px" width="25px" />
               </button>
             </ListItem>
