@@ -58,7 +58,6 @@ const StyledNav = styled.nav`
   bottom: 0px;
   width: 100%;
   margin: 0 auto;
-  height: 20%;
   img {
     border: 1px solid black;
     background-color: orange;
@@ -69,7 +68,6 @@ const StyledNav = styled.nav`
 `;
 const StyledDiv = styled.div`
   overflow: scroll;
-  height: 80%;
 `;
 
 /* <StyledDiv>

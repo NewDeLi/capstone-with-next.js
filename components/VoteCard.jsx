@@ -31,11 +31,11 @@ export default function VoteCard({ question, inputs, setInputs }) {
           return (
             <ListItem key={voteListItem.id}>
               <button onClick={() => handleVoteMinus(voteListItem.id)}>
-                👎
+                <img src="/Icon/.svg" height="25px" width="25px" />
               </button>
               <p>{voteListItem.value}</p>
               <button onClick={() => handleVotePlus(voteListItem.id)}>
-                👍
+                <img src="/Icon/DAUMEN.svg" height="25px" width="25px" />
               </button>
             </ListItem>
           );
@@ -47,11 +47,10 @@ export default function VoteCard({ question, inputs, setInputs }) {
 }
 
 const StyledP = styled.p`
-  border: 1px solid black;
-  border-radius: 50%;
+  border: 5px solid #56a8e1;
+  border-radius: 25px;
+  max-width: 80%;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 1vh 1vw;
   background-color: white;
-  height: 100%;
-  width: 70%;
 `;
