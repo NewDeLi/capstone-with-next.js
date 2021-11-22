@@ -87,14 +87,15 @@ export const OptionFormList = ({
   );
 };
 const StyledP = styled.p`
-  font-size: 1.5rem;
-  border: 1px solid black;
-  border-radius: 15px;
-  margin: 1rem auto;
-  padding: auto;
+  border: 5px solid #56a8e1;
+  border-radius: 25px;
+  color: #606060;
   background-color: white;
-  height: 100%;
-  width: 70%;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 7.5vh;
+  margin-top: 0;
+  padding: 1vh 1vw;
 `;
 const StyledForm = styled.form`
   overflow: auto;
@@ -112,24 +113,27 @@ const StyledList = styled.li`
   margin: 2rem;
   font-size: 1.5rem;
   input {
-    height: 6vh;
-    width: 100%;
-    border-radius: 5px;
+    height: 3rem;
+    width: 60vw;
+    border: 2.5px solid #606060;
+    border-radius: 15px;
   }
   img {
-    background-color: orange;
+    background-color: #56a8e1;
     border: 1px solid black;
     border-radius: 100%;
   }
 `;
 const StyledButton = styled.button`
-  border-radius: 15px;
-  width: 50%;
-  background-color: orange;
-  height: 5vh;
+  all: unset;
+  border-radius: 25px;
   font-size: 2rem;
-  font-weight: bolder;
+  width: 50%;
+  padding: 1vh 5vw;
+  margin: 1rem auto;
+  background-color: #56a8e1;
   color: white;
+  letter-spacing: 2px;
 `;
 const ScreenReaderOnly = styled.span`
   display: inline-block;
