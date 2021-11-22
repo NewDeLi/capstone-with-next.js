@@ -1,29 +1,17 @@
 import styled from "styled-components";
 
-export const Header = ({ pageName }) => {
+export const Header = ({ pageName, onlyIndex }) => {
   return (
     <StyledHeader>
       <h1>{pageName}</h1>
-      <img
-        src="/Icon/scales_hires.png"
-        alt="scale"
-        width="60px"
-        height="60px"
-      />
+      <h5>{onlyIndex}</h5>
     </StyledHeader>
   );
 };
 
 //styled-components
 
-const StyledHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 0.5px solid black;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  background-color: orange;
-  margin: 2vh 10vw;
+const StyledHeader = styled.header`
+  width: 100%;
+  margin: 7.5vh auto;
 `;

@@ -8,17 +8,19 @@ export const GlobalStyle = createGlobalStyle`
   };
   body{
     text-align: center;
-    font-family: 'Rubik', sans-serif;
-    background-color: #f0d8a4;
+    font-family: 'Inter', sans-serif;
   };
   a{
     color: #ff0000ab;
     text-decoration: none;
   };
   h1{
-    color: white;
-    -webkit-text-stroke-width: 2.5px;
-    -webkit-text-stroke-color: black;
-    letter-spacing: 1px;
+    color: #606060;
+    letter-spacing: 2px;
+    font-size: 2.25rem;
   };
+  h5{
+    color:#56a8e1;
+    letter-spacing: 1px;
+  }
 `;

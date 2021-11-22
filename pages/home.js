@@ -17,14 +17,14 @@ export default function Home({
       </Head>
       <Header pageName={"Rooms"} />
       <StyledMain>
-        <h2>
+        <p>
           {username} Room-ID: <br />
-          {roomName}
-        </h2>
+          <span>{roomName}</span>
+        </p>
 
         <StyledForm onSubmit={handleRoomChange}>
           <label>
-            <p>🤔</p>
+            <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
             <input
               type="text"
               name="newQuestion"
@@ -36,7 +36,7 @@ export default function Home({
         </StyledForm>
         <StyledForm onSubmit={handleRoomChange}>
           <label>
-            <p>🤝</p>
+            <img src="/Icon/hände.svg" width="30px" height="30px" />
             <input
               type="text"
               name="newRoom"
@@ -50,7 +50,12 @@ export default function Home({
       <StyledNav>
         <Link href="/">
           <a>
-            <img src="/Icon/logout.svg" alt="home" width="50px" height="50px" />
+            <img
+              src="/Icon/Logout-01.svg"
+              alt="home"
+              width="50px"
+              height="50px"
+            />
           </a>
         </Link>
       </StyledNav>
@@ -58,13 +63,24 @@ export default function Home({
   );
 }
 const StyledMain = styled.main`
-  padding: 3vh 1vw;
-  h2 {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 2vh 0;
-    margin: 6vh 6vw;
+  color: #606060;
+  p {
+    border: 5px solid #56a8e1;
+    border-radius: 25px;
     background-color: white;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 7.5vh;
+    margin-top: 0;
+    padding: 1vh 1vw;
+  }
+  span {
+    color: #56a8e1;
+  }
+  img {
+    display: block;
+    width: 100%;
+    margin-bottom: 1vh;
   }
 `;
 const StyledForm = styled.form`
@@ -72,32 +88,28 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  font-size: 2rem;
+  margin: 3vh auto;
   input {
     height: 3rem;
-    border-radius: 5px;
-    width: 50vw;
+    width: 60vw;
+    border: 2.5px solid #606060;
+    border-radius: 15px;
   }
 `;
 const StyledButton = styled.button`
-  border-radius: 15px;
-  font-size: 1.5rem;
-  width: 52%;
+  all: unset;
+  border-radius: 25px;
+  font-size: 2rem;
+  width: 50%;
+  padding: 1vh 5vw;
   margin: 1rem auto;
-  background-color: orange;
+  background-color: #56a8e1;
   color: white;
+  letter-spacing: 2px;
 `;
 const StyledNav = styled.nav`
   position: fixed;
   bottom: 0px;
   width: 100%;
-  margin: 0 auto;
-  img {
-    border: 1px solid black;
-    background-color: orange;
-    border-radius: 10px;
-    padding: 0.5rem;
-    margin: 3rem 3.1rem;
-  }
+  margin: 2.5vh auto;
 `;
