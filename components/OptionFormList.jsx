@@ -43,9 +43,6 @@ export const OptionFormList = ({
       <Head>
         <title>Create</title>
       </Head>
-
-      <Header pageName={"CREATE"} />
-      <StyledP>{question}</StyledP>
       <StyledForm onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
@@ -84,17 +81,7 @@ export const OptionFormList = ({
     </>
   );
 };
-const StyledP = styled.p`
-  border: 5px solid #56a8e1;
-  border-radius: 25px;
-  color: #606060;
-  background-color: white;
-  width: 60%;
-  margin: auto;
-  margin-bottom: 7.5vh;
-  margin-top: 0;
-  padding: 1vh 1vw;
-`;
+
 const StyledForm = styled.form`
   overflow: auto;
   height: 60vh;

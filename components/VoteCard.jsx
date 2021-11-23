@@ -35,9 +35,6 @@ export default function VoteCard({ question, inputs, setInputs }) {
       <Head>
         <title>Vote</title>
       </Head>
-
-      <Header pageName={"VOTE"} />
-      <StyledP>{question}</StyledP>
       <ul>
         {inputs.map(({ id, value }) => {
           return (
@@ -57,12 +54,3 @@ export default function VoteCard({ question, inputs, setInputs }) {
     </>
   );
 }
-
-const StyledP = styled.p`
-  border: 5px solid #56a8e1;
-  border-radius: 25px;
-  max-width: 80%;
-  margin: 1rem auto;
-  padding: 1vh 1vw;
-  background-color: white;
-`;
