@@ -1,4 +1,4 @@
-import { pusher } from "../../lib";
+import { pusher } from "../../../lib";
 
 export default async function handler(req, res) {
     const { message, username } = req.body;
