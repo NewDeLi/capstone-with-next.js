@@ -1,4 +1,5 @@
 import { OptionFormList } from "../../components/OptionFormList";
+import React from "react";
 import VoteCard from "../../components/VoteCard";
 import Link from "next/link";
 import styled from "styled-components";
@@ -68,5 +69,4 @@ const StyledNav = styled.nav`
 `;
 const StyledMain = styled.main`
   overflow: scroll;
-  height: 80%;
 `;
