@@ -39,22 +39,20 @@ export const OptionFormList = ({
     handleToggle();
   };
   return (
-    <div>
+    <>
       <Head>
         <title>Create</title>
       </Head>
 
-      <Header pageName={"Create"} />
-      <div>
-        <StyledP>{question}</StyledP>
-      </div>
+      <Header pageName={"CREATE"} />
+      <StyledP>{question}</StyledP>
       <StyledForm onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
             return (
               <StyledList key={input.id}>
                 <img
-                  src="/Icon/minus.svg"
+                  src="/Icon/remove_white.svg"
                   alt="delete option"
                   width="35px"
                   height="35px"
@@ -71,7 +69,7 @@ export const OptionFormList = ({
                   />
                 </label>
                 <img
-                  src="/Icon/Plus.svg"
+                  src="/Icon/add_white.svg"
                   alt="add option"
                   width="35px"
                   height="35px"
@@ -81,9 +79,9 @@ export const OptionFormList = ({
             );
           })}
         </ul>
-        <StyledButton type="submit">vote</StyledButton>
+        <StyledButton type="submit">Vote</StyledButton>
       </StyledForm>
-    </div>
+    </>
   );
 };
 const StyledP = styled.p`
@@ -115,12 +113,12 @@ const StyledList = styled.li`
   input {
     height: 3rem;
     width: 60vw;
+    padding: 1vh 15vw;
     border: 2.5px solid #606060;
     border-radius: 15px;
   }
   img {
     background-color: #56a8e1;
-    border: 1px solid black;
     border-radius: 100%;
   }
 `;
@@ -144,7 +142,6 @@ const ScreenReaderOnly = styled.span`
   padding: 0;
   width: 1px;
   font-size: 1px;
-  background-color: blue;
 `;
 /*bug to fix when I have time: if there is only one input and the
 user presses minus there is no way to create a new input*/

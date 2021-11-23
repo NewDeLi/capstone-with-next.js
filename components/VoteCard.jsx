@@ -10,10 +10,8 @@ export default function VoteCard({ question, inputs, setInputs }) {
     setInputs(
       inputs.map((input) => {
         if (input.id === id) {
-          // Create a *new* object with changes
           return { ...input, countYes: input.countYes + 1 };
         } else {
-          // No changes
           return input;
         }
       })
@@ -30,14 +28,15 @@ export default function VoteCard({ question, inputs, setInputs }) {
         }
       })
     );
+    console.log(inputs);
   };
   return (
-    <div>
+    <>
       <Head>
         <title>Vote</title>
       </Head>
 
-      <Header pageName={"Vote"} />
+      <Header pageName={"VOTE"} />
       <StyledP>{question}</StyledP>
       <ul>
         {inputs.map(({ id, value }) => {
@@ -55,7 +54,7 @@ export default function VoteCard({ question, inputs, setInputs }) {
         })}
       </ul>
       <Result inputs={inputs} />
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,5 @@
 import { OptionFormList } from "../../components/OptionFormList";
 import VoteCard from "../../components/VoteCard";
-import Result from "../../components/Result";
 import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
@@ -15,7 +14,7 @@ const AddCard = ({ question }) => {
   if (showCreate) {
     return (
       <>
-        <StyledDiv>
+        <StyledMain>
           <OptionFormList
             inputs={inputs}
             setInputs={setInputs}
@@ -23,11 +22,16 @@ const AddCard = ({ question }) => {
             showCreate={showCreate}
             setShowCreate={setShowCreate}
           />
-        </StyledDiv>
+        </StyledMain>
         <StyledNav>
           <Link href="/home">
             <a>
-              <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
+              <img
+                src="/Icon/Home_grey.svg"
+                alt="home"
+                width="50px"
+                height="50px"
+              />
             </a>
           </Link>
         </StyledNav>
@@ -36,13 +40,18 @@ const AddCard = ({ question }) => {
   }
   return (
     <>
-      <StyledDiv>
+      <StyledMain>
         <VoteCard inputs={inputs} setInputs={setInputs} question={question} />
-      </StyledDiv>
+      </StyledMain>
       <StyledNav>
         <Link href="/home">
           <a>
-            <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
+            <img
+              src="/Icon/Home_grey.svg"
+              alt="home"
+              width="50px"
+              height="50px"
+            />
           </a>
         </Link>
       </StyledNav>
@@ -57,11 +66,7 @@ const StyledNav = styled.nav`
   width: 100%;
   margin: 2.5vh auto;
 `;
-const StyledDiv = styled.div`
+const StyledMain = styled.main`
   overflow: scroll;
   height: 80%;
 `;
-
-/* <StyledDiv>
-        <Result />
-      </StyledDiv>*/

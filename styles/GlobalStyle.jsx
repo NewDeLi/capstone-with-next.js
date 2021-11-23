@@ -8,14 +8,14 @@ export const GlobalStyle = createGlobalStyle`
   };
   body{
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    color: #606060;
   };
   a{
     color: #ff0000ab;
     text-decoration: none;
   };
   h1{
-    color: #606060;
     letter-spacing: 2px;
     font-size: 2.25rem;
   };

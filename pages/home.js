@@ -92,6 +92,7 @@ const StyledForm = styled.form`
   input {
     height: 3rem;
     width: 60vw;
+    padding: 1vh 15vw;
     border: 2.5px solid #606060;
     border-radius: 15px;
   }
