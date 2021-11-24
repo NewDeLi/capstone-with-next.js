@@ -13,7 +13,7 @@ export default function Index({}) {
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
   const firestoreDB = firebase.firestore();
-  const [votes, votesLoading, votesError] = useCollection(
+  const [votes, votesLoading] = useCollection(
     firestoreDB.collection("votes"),
     {}
   );
@@ -29,7 +29,20 @@ export default function Index({}) {
   return (
     <>
       <Header pageName={"DECISIONS"} onlyIndex={"VOTE WITH ME"} />
-      <section>{user ? <Login /> : <SignInScreen />}</section>
+      <section>
+        <SignInScreen />
+      </section>
+   
     </>
   );
 }
+/** <button onClick={() => addVoteDocument("yes")}>yeah</button>
+      <h3>
+        yeah-people:
+        {votes?.docs?.filter((doc) => doc.data().vote === "yes").length}
+      </h3>
+      <button onClick={() => addVoteDocument("no")}>neeee</button>
+      <h3>
+        nooo-people:
+        {votes?.docs?.filter((doc)=>doc.data().vote==="no").length}
+      </h3> */

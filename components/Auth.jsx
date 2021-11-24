@@ -9,6 +9,7 @@ const uiConfig = {
 function SignInScreen() {
   return (
     <div>
+      <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </div>
   );

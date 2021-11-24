@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const Rooms = ({ question }) => {
+const AddCard = ({ question }) => {
   const [inputs, setInputs] = useState([
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
