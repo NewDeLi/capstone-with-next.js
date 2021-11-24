@@ -45,7 +45,7 @@ export const OptionFormList = ({
       </Head>
       <StyledForm onSubmit={handleSubmit}>
         <ul>
-          {inputs.map((input) => {
+          {inputs?inputs.map((input) => {
             return (
               <StyledList key={input.id}>
                 <img
@@ -74,7 +74,7 @@ export const OptionFormList = ({
                 />
               </StyledList>
             );
-          })}
+          }): null}
         </ul>
         <StyledButton type="submit">Vote</StyledButton>
       </StyledForm>

@@ -6,9 +6,10 @@ import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Header } from "../../components/Header";
+import { useLocalStorage } from "../../utils/localStorage";
 
 const AddCard = ({ question }) => {
-  const [inputs, setInputs] = useState([
+  const [inputs, setInputs] = useLocalStorage([
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
   const [showCreate, setShowCreate] = useState(true);

@@ -5,7 +5,7 @@ import { useLocalStorage } from "../utils/localStorage";
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useLocalStorage("testuser");
   const [question, setQuestion] = useLocalStorage("question", "");
-  const [roomName, setRoomName] = useLocalStorage("12345");
+  //const [roomName, setRoomName] = useLocalStorage("12345");
   const router = useRouter();
 
   const handleLogin = (event) => {
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   };
   const handleRoomChange = (event) => {
     event.preventDefault();
-    router.push(`/room/${roomName}`);
+    //router.push(`/room/${roomName}`);
   };
 
   return (
@@ -25,8 +25,8 @@ function MyApp({ Component, pageProps }) {
         username={username}
         handleQuestion={(event) => setQuestion(event.target.value)}
         question={question}
-        handleRoomNameChange={(event) => setRoomName(event.target.value)}
-        roomName={roomName}
+       //handleRoomNameChange={(event) => setRoomName(event.target.value)}
+        //roomName={roomName}
         handleLogin={handleLogin}
         handleRoomChange={handleRoomChange}
         {...pageProps}

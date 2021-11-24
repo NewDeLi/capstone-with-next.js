@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
 import Link from "next/link";
+import router from "next/router";
 
 export default function Home({
   handleQuestion,
@@ -22,7 +23,20 @@ export default function Home({
           <span>{roomName}</span>
         </p>
 
-        <StyledForm onSubmit={handleRoomChange}>
+        <StyledForm
+          onSubmit={async (event) => {
+            event.preventDefault();
+            // use fetch to create new room document (in firebase)
+            // const response = await fetch("/api/room", {
+            //   method: "POST",
+            //   body: JSON.stringify({ question: newQuestion }),
+            //   headers: { "Content-Type": "application/json" },
+            // });
+            // const responseData = await response.json();
+            const roomName = "newRandomRoomName"; // responseData.insertedId
+            router.push(`/room/${roomName}`);
+          }}
+        >
           <label>
             <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
             <input
@@ -34,15 +48,16 @@ export default function Home({
           </label>
           <StyledButton type="submit">Create</StyledButton>
         </StyledForm>
-        <StyledForm onSubmit={handleRoomChange}>
+        <StyledForm
+          onSubmit={(event) => {
+            event.preventDefault();
+            const roomName = event.target.elements.newRoom.value;
+            router.push(`/room/${roomName}`);
+          }}
+        >
           <label>
             <img src="/Icon/hände.svg" width="30px" height="30px" />
-            <input
-              type="text"
-              name="newRoom"
-              placeholder="add room id here"
-              onChange={handleRoomNameChange}
-            />
+            <input type="text" name="newRoom" placeholder="add room id here" />
           </label>
           <StyledButton type="submit">Join</StyledButton>
         </StyledForm>
