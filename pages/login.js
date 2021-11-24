@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-
-export default function Login({ handleUserNameChange, handleLogin }) {
+export default function Login({ handleUserNameChange, handleLogin}) {
   return (
     <>
   
@@ -18,7 +17,7 @@ export default function Login({ handleUserNameChange, handleLogin }) {
           />
         </label>
         <StyledButton type="submit">Start</StyledButton>
-      </StyledForm>{" "}
+      </StyledForm>
     </>
   );
 }

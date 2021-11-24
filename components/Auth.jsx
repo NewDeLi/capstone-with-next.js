@@ -7,14 +7,11 @@ const uiConfig = {
 };
 
 function SignInScreen() {
-    return (
-      <div>
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-      </div>
-    );
+  return (
+    <div>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    </div>
+  );
 }
 
-export default SignInScreen
+export default SignInScreen;
