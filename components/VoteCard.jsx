@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Head from "next/head";
 import { Header } from "./Header";
 import ListItem from "./ListItem";
-import Result from "./Result";
 
-export default function VoteCard({ question, inputs, setInputs }) {
+export default function VoteCard({ roomName, inputs, setInputs }) {
   const handleVotePlus = (id) => {
     setInputs(
       inputs.map((input) => {
@@ -37,7 +36,10 @@ export default function VoteCard({ question, inputs, setInputs }) {
       </Head>
 
       <Header pageName={"VOTE"} />
-      <StyledP>{question}</StyledP>
+      <StyledP>
+        <span>{roomName}</span>
+      </StyledP>
+
       <ul>
         {inputs.map(({ id, value }) => {
           return (
@@ -53,16 +55,18 @@ export default function VoteCard({ question, inputs, setInputs }) {
           );
         })}
       </ul>
-      <Result inputs={inputs} />
     </>
   );
 }
 
 const StyledP = styled.p`
-  border: 5px solid #56a8e1;
+  border: 4px solid #56a8e1;
   border-radius: 25px;
-  max-width: 80%;
-  margin: 1rem auto;
-  padding: 1vh 1vw;
+  color: #606060;
   background-color: white;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 7.5vh;
+  margin-top: 0;
+  padding: 1vh 1vw;
 `;
