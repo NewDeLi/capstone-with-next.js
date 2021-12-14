@@ -7,7 +7,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { async } from "@firebase/util";
 import styled from "styled-components";
-import write from "../components/cloudFirstore/write";
 import Write from "../components/cloudFirstore/write";
 import Read from "../components/cloudFirstore/Read";
 
