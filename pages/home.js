@@ -4,11 +4,9 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export default function Home({
-  handleQuestion,
   handleRoomNameChange,
   handleRoomChange,
   username,
-  roomName,
 }) {
   return (
     <>
@@ -18,8 +16,8 @@ export default function Home({
       <Header pageName={"Rooms"} />
       <StyledMain>
         <p>
-          {username} Room-ID: <br />
-          <span>{roomName}</span>
+          Welcome <span>NewDeLi</span>!
+          <br /> Create or join a room.
         </p>
 
         <StyledForm onSubmit={handleRoomChange}>
@@ -27,9 +25,8 @@ export default function Home({
             <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
             <input
               type="text"
-              name="newQuestion"
-              placeholder="add question here"
-              onChange={handleQuestion}
+              placeholder="room id: question here"
+              onChange={handleRoomNameChange}
             />
           </label>
           <StyledButton type="submit">Create</StyledButton>
@@ -39,8 +36,7 @@ export default function Home({
             <img src="/Icon/hände.svg" width="30px" height="30px" />
             <input
               type="text"
-              name="newRoom"
-              placeholder="add room id here"
+              placeholder="room id: question here"
               onChange={handleRoomNameChange}
             />
           </label>
@@ -65,7 +61,7 @@ export default function Home({
 const StyledMain = styled.main`
   color: #606060;
   p {
-    border: 5px solid #56a8e1;
+    border: 4px solid #56a8e1;
     border-radius: 25px;
     background-color: white;
     width: 60%;
@@ -92,7 +88,7 @@ const StyledForm = styled.form`
   input {
     height: 3rem;
     width: 60vw;
-    padding: 1vh 15vw;
+    padding: 1vh auto;
     border: 2.5px solid #606060;
     border-radius: 15px;
   }

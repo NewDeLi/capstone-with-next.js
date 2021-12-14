@@ -11,7 +11,7 @@ const StyledList = styled.li`
   margin: 2rem auto;
   padding: 1vh 1vw;
   background-color: white;
-  border: 3px solid #606060;
+  border: 2px solid #606060;
   border-radius: 15px;
   button {
     all: unset;

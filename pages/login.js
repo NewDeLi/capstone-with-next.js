@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import SignInScreen from "../components/Auth";
 
 export default function Login({ handleUserNameChange, handleLogin}) {
   return (
     <>
-  
       <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
       <StyledForm onSubmit={handleLogin}>
         <label>

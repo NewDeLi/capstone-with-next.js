@@ -5,7 +5,7 @@ import Head from "next/head";
 import { Header } from "./Header";
 
 export const OptionFormList = ({
-  question,
+  roomName,
   inputs,
   setInputs,
   showCreate,
@@ -15,6 +15,7 @@ export const OptionFormList = ({
     setShowCreate(!showCreate);
   };
   const handleOnChange = (event, id) => {
+    event.preventDefault();
     const value = event.target.value;
     const foundInput = inputs.find((input) => input.id === id);
     foundInput.value = value;
@@ -45,8 +46,10 @@ export const OptionFormList = ({
       </Head>
 
       <Header pageName={"CREATE"} />
-      <StyledP>{question}</StyledP>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledP>
+        <span>{roomName}</span>
+      </StyledP>
+      <form onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
             return (
@@ -62,8 +65,7 @@ export const OptionFormList = ({
                   <ScreenReaderOnly>New option</ScreenReaderOnly>
                   <input
                     type="text"
-                    name="newVoteItem"
-                    placeholder="write option here"
+                    placeholder="write Question here"
                     onChange={(event) => handleOnChange(event, input.id)}
                     value={input.value}
                   />
@@ -80,12 +82,12 @@ export const OptionFormList = ({
           })}
         </ul>
         <StyledButton type="submit">Vote</StyledButton>
-      </StyledForm>
+      </form>
     </>
   );
 };
 const StyledP = styled.p`
-  border: 5px solid #56a8e1;
+  border: 4px solid #56a8e1;
   border-radius: 25px;
   color: #606060;
   background-color: white;
@@ -95,14 +97,7 @@ const StyledP = styled.p`
   margin-top: 0;
   padding: 1vh 1vw;
 `;
-const StyledForm = styled.form`
-  overflow: auto;
-  height: 60vh;
-  &:hover,
-  &:active {
-    visibility: visible;
-  }
-`;
+
 const StyledList = styled.li`
   display: flex;
   align-items: center;
@@ -113,7 +108,7 @@ const StyledList = styled.li`
   input {
     height: 3rem;
     width: 60vw;
-    padding: 1vh 15vw;
+    padding: 1vh auto;
     border: 2.5px solid #606060;
     border-radius: 15px;
   }

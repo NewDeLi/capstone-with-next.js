@@ -1,15 +1,17 @@
 import React from "react";
 import Head from "next/head";
 import { Header } from "../components/Header";
-import Home from "./home";
-import Login from "./login";
 import SignInScreen from "../components/Auth";
 import firebase from "@firebase/app-compat";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { async } from "@firebase/util";
+import styled from "styled-components";
+import write from "../components/cloudFirstore/write";
+import Write from "../components/cloudFirstore/write";
+import Read from "../components/cloudFirstore/Read";
 
-export default function Index({}) {
+export default function Index({ handleUserNameChange, handleLogin }) {
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
   const firestoreDB = firebase.firestore();
@@ -20,22 +22,31 @@ export default function Index({}) {
   if (!votesLoading && votes) {
     votes.docs.map((doc) => console.log(doc.data()));
   }
-  //create document function
+  /*create document function
   const addVoteDocument = async (vote) => {
     await firestoreDB.collection("votes").doc(user.uid).set({
       vote,
     });
-  };
+  };*/
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Header pageName={"DECISIONS"} onlyIndex={"VOTE WITH ME"} />
-      <section>
-        <SignInScreen />
-      </section>
-   
+      <StyleSection>
+        <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
+      </StyleSection>
+      <SignInScreen
+      />
+      <Write/>
+      <Read/>
     </>
   );
 }
+const StyleSection = styled.section`
+  margin-bottom: 20vh;
+`;
 /** <button onClick={() => addVoteDocument("yes")}>yeah</button>
       <h3>
         yeah-people:
