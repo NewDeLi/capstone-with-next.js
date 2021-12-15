@@ -1,21 +1,23 @@
-import { OptionFormList } from "../../components/OptionFormList";
-import React from "react";
-import VoteCard from "../../components/VoteCard";
+import React, { useState } from "react";
+import { OptionFormList } from "../../components/cloudFirstore/OptionFormList";
+import VoteCard from "../../components/cloudFirstore/VoteCard";
 import Link from "next/link";
 import styled from "styled-components";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import Result from "../../components/Result";
+import Result from "../../components/cloudFirstore/Result";
 import "swiper/css";
 import "swiper/css/pagination";
+import firebase from "../../firebase/config.js";
+firebase;
 
-const AddCard = ({ roomName }) => {
+const AddCard = ({ question, setQuestion }) => {
+  const [showCreate, setShowCreate] = useState(true);
   const [inputs, setInputs] = useState([
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
-  const [showCreate, setShowCreate] = useState(true);
+  const [question1, setQuestion1] = useState([{ id: uuidv4(), value: "" }]);
 
   if (showCreate) {
     return (
@@ -24,7 +26,8 @@ const AddCard = ({ roomName }) => {
           <OptionFormList
             inputs={inputs}
             setInputs={setInputs}
-            roomName={roomName}
+            question1={question1}
+            setQuestion1={setQuestion1}
             showCreate={showCreate}
             setShowCreate={setShowCreate}
           />
@@ -58,11 +61,16 @@ const AddCard = ({ roomName }) => {
             <VoteCard
               inputs={inputs}
               setInputs={setInputs}
-              roomName={roomName}
+              question1={question1}
+              setQuestion1={setQuestion1}
             />
           </SwiperSlide>
           <SwiperSlide>
-            <Result inputs={inputs} roomName={roomName} />
+            <Result
+              inputs={inputs}
+              question1={question1}
+              setQuestion1={setQuestion1}
+            />
           </SwiperSlide>
         </Swiper>
       </StyledMain>

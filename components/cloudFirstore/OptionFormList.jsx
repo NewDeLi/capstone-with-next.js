@@ -1,16 +1,41 @@
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
-import { Header } from "./Header";
+import { Header } from "../Header";
 
 export const OptionFormList = ({
-  roomName,
-  inputs,
-  setInputs,
+  question1,
+  setQuestion1,
   showCreate,
   setShowCreate,
+  inputs,
+  setInputs,
 }) => {
+  //fetch question data from firestore
+  useEffect(() => {
+    try {
+      firebase
+        .firestore()
+        .collection("createRoom")
+        .doc("room_id+question")
+        .onSnapshot((doc) => {
+          console.log(doc.data().question[0].value);
+          const roomQuestion = {
+            id: doc.data().question[0].id,
+            value: doc.data().question[0].value,
+          };
+          setQuestion1([roomQuestion]);
+          console.log(question1 + 123);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  //handle conditional rendering and input value changes
   const handleToggle = () => {
     setShowCreate(!showCreate);
   };
@@ -21,6 +46,14 @@ export const OptionFormList = ({
     foundInput.value = value;
     setInputs([...inputs]);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setInputs([...inputs]);
+    handleToggle();
+  };
+
+  //handle number of input fields with create and remove
   const handleCreate = () => {
     const id = uuidv4();
     const newOptionInput = {
@@ -34,11 +67,7 @@ export const OptionFormList = ({
   const handleRemove = (id) => {
     setInputs(inputs.filter((input) => input.id !== id));
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setInputs([...inputs]);
-    handleToggle();
-  };
+
   return (
     <>
       <Head>
@@ -47,7 +76,14 @@ export const OptionFormList = ({
 
       <Header pageName={"CREATE"} />
       <StyledP>
-        <span>{roomName}</span>
+        {question1.map((single) => {
+          return (
+            <>
+              <span>{single.id}</span>
+              <span>{single.value}</span>
+            </>
+          );
+        })}
       </StyledP>
       <form onSubmit={handleSubmit}>
         <ul>

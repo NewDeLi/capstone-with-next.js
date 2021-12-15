@@ -1,17 +1,17 @@
 import React from "react";
 import Head from "next/head";
 import { Header } from "../components/Header";
-import SignInScreen from "../components/Auth";
-import firebase from "@firebase/app-compat";
+import firebase from "../firebase/config.js";
+import SignInScreen from "../components/Authentication/SignInScreen";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { async } from "@firebase/util";
 import styled from "styled-components";
-import Write from "../components/cloudFirstore/write";
-import Read from "../components/cloudFirstore/Read";
 
-export default function Index({ handleUserNameChange, handleLogin }) {
-  const auth = firebase.auth();
+firebase;
+
+export default function Index({}) {
+  /*const auth = firebase.auth();
   const [user] = useAuthState(auth);
   const firestoreDB = firebase.firestore();
   const [votes, votesLoading] = useCollection(
@@ -20,7 +20,7 @@ export default function Index({ handleUserNameChange, handleLogin }) {
   );
   if (!votesLoading && votes) {
     votes.docs.map((doc) => console.log(doc.data()));
-  }
+  }*/
   /*create document function
   const addVoteDocument = async (vote) => {
     await firestoreDB.collection("votes").doc(user.uid).set({
@@ -36,10 +36,7 @@ export default function Index({ handleUserNameChange, handleLogin }) {
       <StyleSection>
         <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
       </StyleSection>
-      <SignInScreen
-      />
-      <Write/>
-      <Read/>
+      <SignInScreen />
     </>
   );
 }

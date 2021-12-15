@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import Head from "next/head";
-import { Header } from "./Header";
+import { Header } from "../Header";
 
-export default function Result({ inputs, roomName }) {
+export default function Result({ inputs, question1, setQuestion1 }) {
+  //fetch question data from firestore
+  useEffect(() => {
+    try {
+      firebase
+        .firestore()
+        .collection("createRoom")
+        .doc("room_id+question")
+        .onSnapshot((doc) => {
+          console.log(doc.data().question[0].value);
+          const roomQuestion = {
+            id: doc.data().question[0].id,
+            value: doc.data().question[0].value,
+          };
+          setQuestion1([roomQuestion]);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -13,7 +32,14 @@ export default function Result({ inputs, roomName }) {
 
       <Header pageName={"RESULTS"} />
       <StyledP>
-        <span>{roomName}</span>
+        {question1.map((single) => {
+          return (
+            <>
+              <span>{single.id}</span>
+              <span>{single.value}</span>
+            </>
+          );
+        })}
       </StyledP>
       <StyledBar>
         <Bar

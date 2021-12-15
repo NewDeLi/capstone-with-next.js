@@ -1,4 +1,4 @@
-import firebase from "../firebase/config";
+import firebase from "../../firebase/config";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import styled from "styled-components";
 const uiConfig = {

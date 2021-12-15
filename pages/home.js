@@ -2,12 +2,14 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
 import Link from "next/link";
+import firebase from "../firebase/config.js";
+import "firebase/compat/firestore";
+import CreateRoom from "../components/cloudFirstore/CreateRoom";
+import JoinRoom from "../components/JoinRoom";
 
-export default function Home({
-  handleRoomNameChange,
-  handleRoomChange,
-  username,
-}) {
+firebase;
+
+export default function Home({ question, setQuestion }) {
   return (
     <>
       <Head>
@@ -20,28 +22,8 @@ export default function Home({
           <br /> Create or join a room.
         </p>
 
-        <StyledForm onSubmit={handleRoomChange}>
-          <label>
-            <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
-            <input
-              type="text"
-              placeholder="room id: question here"
-              onChange={handleRoomNameChange}
-            />
-          </label>
-          <StyledButton type="submit">Create</StyledButton>
-        </StyledForm>
-        <StyledForm onSubmit={handleRoomChange}>
-          <label>
-            <img src="/Icon/hände.svg" width="30px" height="30px" />
-            <input
-              type="text"
-              placeholder="room id: question here"
-              onChange={handleRoomNameChange}
-            />
-          </label>
-          <StyledButton type="submit">Join</StyledButton>
-        </StyledForm>
+        <CreateRoom setQuestion={setQuestion} question={question} />
+        <JoinRoom />
       </StyledMain>
       <StyledNav>
         <Link href="/">
@@ -79,31 +61,7 @@ const StyledMain = styled.main`
     margin-bottom: 1vh;
   }
 `;
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 3vh auto;
-  input {
-    height: 3rem;
-    width: 60vw;
-    padding: 1vh auto;
-    border: 2.5px solid #606060;
-    border-radius: 15px;
-  }
-`;
-const StyledButton = styled.button`
-  all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  width: 50%;
-  padding: 1vh 5vw;
-  margin: 1rem auto;
-  background-color: #56a8e1;
-  color: white;
-  letter-spacing: 2px;
-`;
+
 const StyledNav = styled.nav`
   position: fixed;
   bottom: 0px;
