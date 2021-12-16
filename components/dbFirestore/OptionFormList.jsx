@@ -24,11 +24,11 @@ export const OptionFormList = ({
         .onSnapshot((doc) => {
           console.log(doc.data().question[0].value);
           const fetchedQuestion = {
-            id: doc.data().question[0].id,
+            id: doc.data().question[0].id,//unique key bug here?
             value: doc.data().question[0].value,
           };
           setRoomQuestion([fetchedQuestion]);
-          console.log(roomQuestion + 123);
+          console.log(fetchedQuestion);
         });
     } catch (error) {
       console.log(error);

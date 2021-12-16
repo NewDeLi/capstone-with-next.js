@@ -10,7 +10,7 @@ import { useLocalStorage } from "../utils/localStorage";
 
 firebase;
 
-export default function Home({ username, roomName }) {
+export default function Home({ username}) {
   const [question, setQuestion] = useLocalStorage([
     { id: uuidv4(), value: "" },
   ]);
