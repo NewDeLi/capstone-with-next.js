@@ -6,10 +6,9 @@ import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Header } from "../../components/Header";
-import { useLocalStorage } from "../../utils/localStorage";
 
 const AddCard = ({ question }) => {
-  const [inputs, setInputs] = useLocalStorage([
+  const [inputs, setInputs] = useState([
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
   const [showCreate, setShowCreate] = useState(true);
@@ -75,7 +74,7 @@ const StyledNav = styled.nav`
 `;
 const StyledMain = styled.main`
   overflow: scroll;
-  height:60vh;
+  height: 60vh;
 `;
 const StyledP = styled.p`
   border: 5px solid #56a8e1;
@@ -85,4 +84,3 @@ const StyledP = styled.p`
   padding: 1vh 1vw;
   background-color: white;
 `;
-

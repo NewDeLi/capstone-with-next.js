@@ -2,7 +2,8 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
 import Link from "next/link";
-import router from "next/router";
+import CreateRoom from "../components/CreateRoom";
+import JoinRoom from "../components/JoinRoom";
 
 export default function Home({
   handleQuestion,
@@ -23,44 +24,8 @@ export default function Home({
           <span>{roomName}</span>
         </p>
 
-        <StyledForm
-          onSubmit={async (event) => {
-            event.preventDefault();
-            // use fetch to create new room document (in firebase)
-            // const response = await fetch("/api/room", {
-            //   method: "POST",
-            //   body: JSON.stringify({ question: newQuestion }),
-            //   headers: { "Content-Type": "application/json" },
-            // });
-            // const responseData = await response.json();
-            const roomName = "newRandomRoomName"; // responseData.insertedId
-            router.push(`/room/${roomName}`);
-          }}
-        >
-          <label>
-            <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
-            <input
-              type="text"
-              name="newQuestion"
-              placeholder="add question here"
-              onChange={handleQuestion}
-            />
-          </label>
-          <StyledButton type="submit">Create</StyledButton>
-        </StyledForm>
-        <StyledForm
-          onSubmit={(event) => {
-            event.preventDefault();
-            const roomName = event.target.elements.newRoom.value;
-            router.push(`/room/${roomName}`);
-          }}
-        >
-          <label>
-            <img src="/Icon/hände.svg" width="30px" height="30px" />
-            <input type="text" name="newRoom" placeholder="add room id here" />
-          </label>
-          <StyledButton type="submit">Join</StyledButton>
-        </StyledForm>
+        <CreateRoom handleQuestion={handleQuestion}/>
+        <JoinRoom />
       </StyledMain>
       <StyledNav>
         <Link href="/">
@@ -98,31 +63,7 @@ const StyledMain = styled.main`
     margin-bottom: 1vh;
   }
 `;
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 3vh auto;
-  input {
-    height: 3rem;
-    width: 60vw;
-    padding: 1vh 15vw;
-    border: 2.5px solid #606060;
-    border-radius: 15px;
-  }
-`;
-const StyledButton = styled.button`
-  all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  width: 50%;
-  padding: 1vh 5vw;
-  margin: 1rem auto;
-  background-color: #56a8e1;
-  color: white;
-  letter-spacing: 2px;
-`;
+
 const StyledNav = styled.nav`
   position: fixed;
   bottom: 0px;

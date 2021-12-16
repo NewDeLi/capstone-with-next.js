@@ -43,9 +43,14 @@ export const OptionFormList = ({
       <Head>
         <title>Create</title>
       </Head>
-      <StyledForm onSubmit={handleSubmit}>
+
+      <Header pageName={"CREATE"} />
+      <StyledP>
+        <span>{question}</span>
+      </StyledP>
+      <form onSubmit={handleSubmit}>
         <ul>
-          {inputs?inputs.map((input) => {
+          {inputs.map((input) => {
             return (
               <StyledList key={input.id}>
                 <img
@@ -59,8 +64,7 @@ export const OptionFormList = ({
                   <ScreenReaderOnly>New option</ScreenReaderOnly>
                   <input
                     type="text"
-                    name="newVoteItem"
-                    placeholder="write option here"
+                    placeholder="write Question here"
                     onChange={(event) => handleOnChange(event, input.id)}
                     value={input.value}
                   />
@@ -74,22 +78,25 @@ export const OptionFormList = ({
                 />
               </StyledList>
             );
-          }): null}
+          })}
         </ul>
         <StyledButton type="submit">Vote</StyledButton>
-      </StyledForm>
+      </form>
     </>
   );
 };
-
-const StyledForm = styled.form`
-  overflow: auto;
-  height: 60vh;
-  &:hover,
-  &:active {
-    visibility: visible;
-  }
+const StyledP = styled.p`
+  border: 4px solid #56a8e1;
+  border-radius: 25px;
+  color: #606060;
+  background-color: white;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 7.5vh;
+  margin-top: 0;
+  padding: 1vh 1vw;
 `;
+
 const StyledList = styled.li`
   display: flex;
   align-items: center;
@@ -100,7 +107,7 @@ const StyledList = styled.li`
   input {
     height: 3rem;
     width: 60vw;
-    padding: 1vh 15vw;
+    padding: 1vh auto;
     border: 2.5px solid #606060;
     border-radius: 15px;
   }
