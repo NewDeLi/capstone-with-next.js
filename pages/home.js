@@ -2,16 +2,19 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import styled from "styled-components";
 import Link from "next/link";
-import CreateRoom from "../components/CreateRoom";
+import CreateRoom from "../components/dbFirestore/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
+import firebase from "../firebase/config.js";
+import "firebase/compat/firestore";
+import { v4 as uuidv4 } from "uuid";
+import { useLocalStorage } from "../utils/localStorage";
 
-export default function Home({
-  handleQuestion,
-  handleRoomNameChange,
-  handleRoomChange,
-  username,
-  roomName,
-}) {
+firebase;
+
+export default function Home({ username, roomName }) {
+  const [question, setQuestion] = useLocalStorage([
+    { id: uuidv4(), value: "" },
+  ]);
   return (
     <>
       <Head>
@@ -24,7 +27,7 @@ export default function Home({
           <span>{roomName}</span>
         </p>
 
-        <CreateRoom handleQuestion={handleQuestion}/>
+        <CreateRoom question={question} setQuestion={setQuestion} />
         <JoinRoom />
       </StyledMain>
       <StyledNav>
