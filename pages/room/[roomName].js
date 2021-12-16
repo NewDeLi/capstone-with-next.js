@@ -1,11 +1,15 @@
-import { OptionFormList } from "../../components/OptionFormList";
 import React from "react";
+import { OptionFormList } from "../../components/OptionFormList";
 import VoteCard from "../../components/VoteCard";
+import Result from "../../components/Result";
 import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Header } from "../../components/Header";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const AddCard = ({ question }) => {
   const [inputs, setInputs] = useState([
@@ -16,8 +20,6 @@ const AddCard = ({ question }) => {
   if (showCreate) {
     return (
       <>
-        <Header pageName={"CREATE"} />
-        <StyledP>{question}</StyledP>
         <StyledMain>
           <OptionFormList
             inputs={inputs}
@@ -44,10 +46,25 @@ const AddCard = ({ question }) => {
   }
   return (
     <>
-      <Header pageName={"VOTE"} />
-      <StyledP>{question}</StyledP>
       <StyledMain>
-        <VoteCard inputs={inputs} setInputs={setInputs} question={question} />
+        <Swiper
+          modules={[Pagination]}
+          pagination={true}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <VoteCard
+              inputs={inputs}
+              setInputs={setInputs}
+              question={question}
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Result inputs={inputs} question={question} />
+          </SwiperSlide>
+        </Swiper>
       </StyledMain>
       <StyledNav>
         <Link href="/home">
@@ -74,13 +91,5 @@ const StyledNav = styled.nav`
 `;
 const StyledMain = styled.main`
   overflow: scroll;
-  height: 60vh;
-`;
-const StyledP = styled.p`
-  border: 5px solid #56a8e1;
-  border-radius: 25px;
-  max-width: 80%;
-  margin: 1rem auto;
-  padding: 1vh 1vw;
-  background-color: white;
+  height: 90vh;
 `;
