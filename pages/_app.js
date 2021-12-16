@@ -4,7 +4,6 @@ import { useLocalStorage } from "../utils/localStorage";
 
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useLocalStorage("testuser");
-  const [roomName, setRoomName] = useLocalStorage("12345");
 
   const router = useRouter();
 
@@ -19,8 +18,6 @@ function MyApp({ Component, pageProps }) {
       <Component
         handleUserNameChange={(event) => setUsername(event.target.value)}
         username={username}
-        handleRoomNameChange={(event) => setRoomName(event.target.value)}
-        roomName={roomName}
         handleLogin={handleLogin}
         {...pageProps}
       />

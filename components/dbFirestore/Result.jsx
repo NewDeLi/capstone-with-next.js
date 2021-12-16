@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
-import { Header } from "./Header";
+import { Header } from "../Header";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
-export default function Result({ question, inputs }) {
+export default function Result({ inputs, roomQuestion, setRoomQuestion }) {
+  //fetch question data from firestore
+  useEffect(() => {
+    try {
+      firebase
+        .firestore()
+        .collection("createRoom")
+        .doc("room_id+question")
+        .onSnapshot((doc) => {
+          console.log(doc.data().question[0].value);
+          const fetchedQuestion = {
+            id: doc.data().question[0].id,
+            value: doc.data().question[0].value,
+          };
+          setRoomQuestion([fetchedQuestion]);
+          console.log(roomQuestion + 123);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -12,9 +34,19 @@ export default function Result({ question, inputs }) {
       </Head>
 
       <Header pageName={"RESULTS"} />
-      <StyledP>
-        <span>{question}</span>
-      </StyledP>
+
+      <StyledSection>
+        {roomQuestion.map((single, index) => {
+          return (
+            <>
+              <p key={index}>
+                <span className="highlight">room-id:{single.id}</span>
+                <span>question:{single.value}</span>
+              </p>
+            </>
+          );
+        })}
+      </StyledSection>
       <StyledBar>
         <Bar
           data={{
@@ -75,7 +107,7 @@ export default function Result({ question, inputs }) {
   );
 }
 
-const StyledP = styled.p`
+const StyledSection = styled.section`
   border: 4px solid #56a8e1;
   border-radius: 25px;
   color: #606060;
@@ -85,6 +117,12 @@ const StyledP = styled.p`
   margin-bottom: 7.5vh;
   margin-top: 0;
   padding: 1vh 1vw;
+  span {
+    display: block;
+  }
+  .highlight {
+    color: #56a8e1;
+  }
 `;
 
 const StyledBar = styled.section`

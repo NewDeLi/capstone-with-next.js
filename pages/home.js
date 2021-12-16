@@ -5,7 +5,6 @@ import Link from "next/link";
 import CreateRoom from "../components/dbFirestore/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
 import firebase from "../firebase/config.js";
-import "firebase/compat/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../utils/localStorage";
 
@@ -23,10 +22,9 @@ export default function Home({ username, roomName }) {
       <Header pageName={"Rooms"} />
       <StyledMain>
         <p>
-          {username} Room-ID: <br />
-          <span>{roomName}</span>
+          Welcome <span>{username}</span>!
+          <br /> Create or join a room.
         </p>
-
         <CreateRoom question={question} setQuestion={setQuestion} />
         <JoinRoom />
       </StyledMain>

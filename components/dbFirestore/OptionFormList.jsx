@@ -1,25 +1,59 @@
+import React, { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
-import { Header } from "./Header";
+import { Header } from "../Header";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 export const OptionFormList = ({
-  question,
   inputs,
   setInputs,
   showCreate,
   setShowCreate,
+  roomQuestion,
+  setRoomQuestion,
 }) => {
+  //fetch question data from firestore
+  useEffect(() => {
+    try {
+      firebase
+        .firestore()
+        .collection("createRoom")
+        .doc("room_id+question")
+        .onSnapshot((doc) => {
+          console.log(doc.data().question[0].value);
+          const fetchedQuestion = {
+            id: doc.data().question[0].id,
+            value: doc.data().question[0].value,
+          };
+          setRoomQuestion([fetchedQuestion]);
+          console.log(roomQuestion + 123);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  //handle conditional rendering and input value changes
   const handleToggle = () => {
     setShowCreate(!showCreate);
   };
   const handleOnChange = (event, id) => {
+    event.preventDefault();
     const value = event.target.value;
     const foundInput = inputs.find((input) => input.id === id);
     foundInput.value = value;
     setInputs([...inputs]);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setInputs([...inputs]);
+    handleToggle();
+  };
+
+  //handle number of input fields with create and remove
   const handleCreate = () => {
     const id = uuidv4();
     const newOptionInput = {
@@ -33,11 +67,7 @@ export const OptionFormList = ({
   const handleRemove = (id) => {
     setInputs(inputs.filter((input) => input.id !== id));
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setInputs([...inputs]);
-    handleToggle();
-  };
+
   return (
     <>
       <Head>
@@ -45,9 +75,18 @@ export const OptionFormList = ({
       </Head>
 
       <Header pageName={"CREATE"} />
-      <StyledP>
-        <span>{question}</span>
-      </StyledP>
+      <StyledSection>
+        {roomQuestion.map((single, index) => {
+          return (
+            <>
+              <p key={index}>
+                <span className="highlight">room-id:{single.id}</span>
+                <span>question:{single.value}</span>
+              </p>
+            </>
+          );
+        })}
+      </StyledSection>
       <form onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
@@ -85,7 +124,7 @@ export const OptionFormList = ({
     </>
   );
 };
-const StyledP = styled.p`
+const StyledSection = styled.section`
   border: 4px solid #56a8e1;
   border-radius: 25px;
   color: #606060;
@@ -95,6 +134,12 @@ const StyledP = styled.p`
   margin-bottom: 7.5vh;
   margin-top: 0;
   padding: 1vh 1vw;
+  span {
+    display: block;
+  }
+  .highlight {
+    color: #56a8e1;
+  }
 `;
 
 const StyledList = styled.li`
