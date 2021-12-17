@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 firebase;
 
-export default function Index({}) {
+export default function Index({handleLogin}) {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ export default function Index({}) {
       <StyleSection>
         <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
       </StyleSection>
-      <SignInScreen />
+      <SignInScreen handleLogin={handleLogin}/>
     </>
   );
 }
