@@ -4,16 +4,50 @@ import styled from "styled-components";
 import Link from "next/link";
 import CreateRoom from "../components/dbFirestore/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
-import firebase from "../firebase/config.js";
-import { v4 as uuidv4 } from "uuid";
-import { useLocalStorage } from "../utils/localStorage";
+import { useUser } from "../firebase/useUser";
+import { useState } from "react";
 
-firebase;
-
-export default function Home({ username}) {
-  const [question, setQuestion] = useLocalStorage([
-    { id: uuidv4(), value: "" },
-  ]);
+export default function Home({}) {
+  const [question, setQuestion] = useState([{ id: "", value: "" }]);
+  const { user, logout } = useUser();
+  if (user) {
+    return (
+      <>
+        <Head>
+          <title>Home</title>
+        </Head>
+        <Header pageName={"Rooms"} />
+        <StyledMain>
+          <section>
+            Welcome
+            <span>
+              {user.email}
+              {user.profilePic ? (
+                <image src={user.profilePic} height={100} width={100}></image>
+              ) : (
+                <p>No profile pic</p>
+              )}
+            </span>
+            <br /> Create or join a room.
+          </section>
+          <CreateRoom question={question} setQuestion={setQuestion} />
+          <JoinRoom />
+        </StyledMain>
+        <StyledNav>
+          <Link href="/" onClick={() => logout()}>
+            <a>
+              <img
+                src="/Icon/Logout-01.svg"
+                alt="home"
+                width="50px"
+                height="50px"
+              />
+            </a>
+          </Link>
+        </StyledNav>
+      </>
+    );
+  }
   return (
     <>
       <Head>
@@ -22,7 +56,8 @@ export default function Home({ username}) {
       <Header pageName={"Rooms"} />
       <StyledMain>
         <p>
-          Welcome <span>{username}</span>!
+          Welcome <span>no user</span>
+          !
           <br /> Create or join a room.
         </p>
         <CreateRoom question={question} setQuestion={setQuestion} />
@@ -45,14 +80,12 @@ export default function Home({ username}) {
 }
 const StyledMain = styled.main`
   color: #606060;
-  p {
+  section {
     border: 5px solid #56a8e1;
     border-radius: 25px;
     background-color: white;
     width: 60%;
     margin: auto;
-    margin-bottom: 7.5vh;
-    margin-top: 0;
     padding: 1vh 1vw;
   }
   span {

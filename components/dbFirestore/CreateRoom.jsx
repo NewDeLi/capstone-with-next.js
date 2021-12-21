@@ -3,18 +3,19 @@ import router from "next/router";
 import styled from "styled-components";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../../firebase/useUser";
 
 export default function CreateRoom({ question, setQuestion }) {
+  const { user } = useUser();
   //write question data to firestore database
   const sendData = async () => {
     try {
       await firebase
         .firestore()
         .collection("createRoom")
-        .doc("room_id+question")
+        .doc("question")
         .set({
-          question: [{ id: uuidv4(), value: question }],
+          question: [{ id: user.id, value: `${question}` }],
         })
         .then(alert("data send to cloud"));
     } catch (error) {
@@ -28,9 +29,8 @@ export default function CreateRoom({ question, setQuestion }) {
       firebase
         .firestore()
         .collection("createRoom")
-        .doc("room_id+question")
+        .doc("question")
         .onSnapshot(function (doc) {
-          console.log(doc.data().question[0].id);
           const roomName = doc.data().question[0].id;
           router.push(`/room/${roomName}`);
         });
@@ -51,7 +51,7 @@ export default function CreateRoom({ question, setQuestion }) {
         }}
       >
         <label>
-          <img src="/Icon/pencil-01.svg" width="30px" height="30px" />
+          <img src="/Icon/pencil-01.svg" width="25px" height="25px" />
           <input
             type="text"
             name="createRoom"
@@ -72,20 +72,18 @@ const StyledForm = styled.form`
   justify-content: center;
   margin: 3vh auto;
   input {
-    height: 3rem;
+    height: 2rem;
     width: 60vw;
-    padding: 1vh auto;
     border: 2.5px solid #606060;
-    border-radius: 15px;
+    border-radius: 5px;
   }
 `;
 
 const StyledButton = styled.button`
   all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  width: 50%;
-  padding: 1vh 5vw;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  width: 60vw;
   margin: 1rem auto;
   background-color: #56a8e1;
   color: white;

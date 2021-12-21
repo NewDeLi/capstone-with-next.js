@@ -13,7 +13,7 @@ export default function JoinRoom() {
         }}
       >
         <label>
-          <img src="/Icon/hände.svg" width="30px" height="30px" />
+          <img src="/Icon/hände.svg" width="25px" height="25px" />
           <input type="text" name="newRoom" placeholder="add room id here" />
         </label>
         <StyledButton type="submit">Join</StyledButton>
@@ -29,19 +29,18 @@ const StyledForm = styled.form`
   justify-content: center;
   margin: 3vh auto;
   input {
-    height: 3rem;
+    height: 2rem;
     width: 60vw;
     padding: 1vh 15vw;
     border: 2.5px solid #606060;
-    border-radius: 15px;
+    border-radius: 5px;
   }
 `;
 const StyledButton = styled.button`
   all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  width: 50%;
-  padding: 1vh 5vw;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  width: 60vw;
   margin: 1rem auto;
   background-color: #56a8e1;
   color: white;

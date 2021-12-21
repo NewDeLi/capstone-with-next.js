@@ -1,32 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
-import { Header } from "../Header";
+import { Header } from "./Header";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
+import QuestionFromDb from "./dbFirestore/questionFromDb";
 
-export default function Result({ inputs, roomQuestion, setRoomQuestion }) {
-  //fetch question data from firestore
-  useEffect(() => {
-    try {
-      firebase
-        .firestore()
-        .collection("createRoom")
-        .doc("room_id+question")
-        .onSnapshot((doc) => {
-          console.log(doc.data().question[0].value);
-          const fetchedQuestion = {
-            id: doc.data().question[0].id,
-            value: doc.data().question[0].value,
-          };
-          setRoomQuestion([fetchedQuestion]);
-          console.log(roomQuestion + 123);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+export default function Result({ inputs }) {
   return (
     <>
       <Head>
@@ -35,18 +14,7 @@ export default function Result({ inputs, roomQuestion, setRoomQuestion }) {
 
       <Header pageName={"RESULTS"} />
 
-      <StyledSection>
-        {roomQuestion.map((single, index) => {
-          return (
-            <>
-              <p key={index}>
-                <span className="highlight">room-id:{single.id}</span>
-                <span>question:{single.value}</span>
-              </p>
-            </>
-          );
-        })}
-      </StyledSection>
+      <QuestionFromDb />
       <StyledBar>
         <Bar
           data={{
@@ -106,24 +74,6 @@ export default function Result({ inputs, roomQuestion, setRoomQuestion }) {
     </>
   );
 }
-
-const StyledSection = styled.section`
-  border: 4px solid #56a8e1;
-  border-radius: 25px;
-  color: #606060;
-  background-color: white;
-  width: 60%;
-  margin: auto;
-  margin-bottom: 7.5vh;
-  margin-top: 0;
-  padding: 1vh 1vw;
-  span {
-    display: block;
-  }
-  .highlight {
-    color: #56a8e1;
-  }
-`;
 
 const StyledBar = styled.section`
   max-width: 100%;

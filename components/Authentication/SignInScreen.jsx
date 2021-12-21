@@ -1,59 +1,43 @@
-import firebase from "../../firebase/config";
+import initFirebase from "../../firebase/config";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import styled from "styled-components";
+import { setUserCookie } from "../../firebase/userCookies";
+import { mapUserData } from "../../firebase/mapUserData";
+
+initFirebase();
+
 const uiConfig = {
+  signInFlow: "popup",
+  signInOptions: [
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true,
+    },
+  ],
   signInSuccessUrl: "/home",
-  signInOptions: [firebase.auth.GithubAuthProvider.PROVIDER_ID],
+  credentialHelper: "none",
+  callbacks: {
+    signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
+      const userData = mapUserData(user);
+      setUserCookie(userData);
+    },
+  },
 };
 
-function SignInScreen({ handleUserNameChange, handleLogin }) {
+function SignInScreen() {
   return (
     <>
       <section>
-        <StyledForm onSubmit={handleLogin}>
-          <label>
-            <p>
-              <img src="/Icon/Username.svg" width="30px" height="30px" />
-            </p>
-            <input
-              type="text"
-              placeholder="enter your username..."
-              onChange={handleUserNameChange}
-            />
-          </label>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
-          <StyledButton type="submit">Start</StyledButton>
-        </StyledForm>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
       </section>
     </>
   );
 }
 
 export default SignInScreen;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  margin-top: 13vh;
-  input {
-    padding: 1vh 5vw;
-    border-radius: 5px;
-    border: 2.5px solid #606060;
-  }
-`;
-const StyledButton = styled.button`
-  all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  padding: 1vh 15vw;
-  margin: 1rem auto;
-  background-color: #56a8e1;
-  color: white;
-  letter-spacing: 2px;
-`;

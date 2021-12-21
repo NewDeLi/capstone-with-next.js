@@ -1,40 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Head from "next/head";
-import { Header } from "../Header";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
+import { Header } from "./Header";
+import QuestionFromDb from "./dbFirestore/questionFromDb";
 
 export const OptionFormList = ({
   inputs,
   setInputs,
   showCreate,
   setShowCreate,
-  roomQuestion,
-  setRoomQuestion,
 }) => {
-  //fetch question data from firestore
-  useEffect(() => {
-    try {
-      firebase
-        .firestore()
-        .collection("createRoom")
-        .doc("room_id+question")
-        .onSnapshot((doc) => {
-          console.log(doc.data().question[0].value);
-          const fetchedQuestion = {
-            id: doc.data().question[0].id,//unique key bug here?
-            value: doc.data().question[0].value,
-          };
-          setRoomQuestion([fetchedQuestion]);
-          console.log(fetchedQuestion);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   //handle conditional rendering and input value changes
   const handleToggle = () => {
     setShowCreate(!showCreate);
@@ -75,18 +51,7 @@ export const OptionFormList = ({
       </Head>
 
       <Header pageName={"CREATE"} />
-      <StyledSection>
-        {roomQuestion.map((single, index) => {
-          return (
-            <>
-              <p key={index}>
-                <span className="highlight">room-id:{single.id}</span>
-                <span>question:{single.value}</span>
-              </p>
-            </>
-          );
-        })}
-      </StyledSection>
+      <QuestionFromDb />
       <form onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {
@@ -95,8 +60,8 @@ export const OptionFormList = ({
                 <img
                   src="/Icon/remove_white.svg"
                   alt="delete option"
-                  width="35px"
-                  height="35px"
+                  width="25px"
+                  height="25px"
                   onClick={() => handleRemove(input.id)}
                 />
                 <label>
@@ -111,8 +76,8 @@ export const OptionFormList = ({
                 <img
                   src="/Icon/add_white.svg"
                   alt="add option"
-                  width="35px"
-                  height="35px"
+                  width="25px"
+                  height="25px"
                   onClick={handleCreate}
                 />
               </StyledList>
@@ -124,23 +89,6 @@ export const OptionFormList = ({
     </>
   );
 };
-const StyledSection = styled.section`
-  border: 4px solid #56a8e1;
-  border-radius: 25px;
-  color: #606060;
-  background-color: white;
-  width: 60%;
-  margin: auto;
-  margin-bottom: 7.5vh;
-  margin-top: 0;
-  padding: 1vh 1vw;
-  span {
-    display: block;
-  }
-  .highlight {
-    color: #56a8e1;
-  }
-`;
 
 const StyledList = styled.li`
   display: flex;
@@ -150,11 +98,11 @@ const StyledList = styled.li`
   margin: 2rem;
   font-size: 1.5rem;
   input {
-    height: 3rem;
+    height: 2rem;
     width: 60vw;
     padding: 1vh auto;
     border: 2.5px solid #606060;
-    border-radius: 15px;
+    border-radius: 5px;
   }
   img {
     background-color: #56a8e1;
@@ -163,10 +111,9 @@ const StyledList = styled.li`
 `;
 const StyledButton = styled.button`
   all: unset;
-  border-radius: 25px;
-  font-size: 2rem;
-  width: 50%;
-  padding: 1vh 5vw;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  width: 60vw;
   margin: 1rem auto;
   background-color: #56a8e1;
   color: white;
