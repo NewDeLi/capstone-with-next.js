@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Head from "next/head";
 import { Header } from "./Header";
-import QuestionFromDb from "./dbFirestore/questionFromDb";
+import QuestionFromDb from "./dbFirestore/QuestionFromDb";
 
 export const OptionFormList = ({
   inputs,

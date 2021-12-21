@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Header } from "./Header";
 import ListItem from "./ListItem";
-import QuestionFromDb from "./dbFirestore/questionFromDb";
+import QuestionFromDb from "./dbFirestore/QuestionFromDb";
 
 export default function VoteCard({ inputs, setInputs }) {
   //handle vote mode

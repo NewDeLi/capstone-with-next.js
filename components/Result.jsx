@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Header } from "./Header";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
-import QuestionFromDb from "./dbFirestore/questionFromDb";
+import QuestionFromDb from "./dbFirestore/QuestionFromDb";
 
 export default function Result({ inputs }) {
   return (
