@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import CreateRoom from "../components/dbFirestore/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
+import Counter from "../components/dbRealtime/Counter";
 import { useUser } from "../firebase/useUser";
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ export default function Home({}) {
         </Head>
         <Header pageName={"Rooms"} />
         <StyledMain>
+          <Counter id={user.id}/>
           <section>
             Welcome
             <span>
