@@ -4,7 +4,7 @@ import "firebase/compat/database";
 const incrementCount = async (req, res) => {
   const ref = firebase
     .database(
-      "https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app/counts"
+      "https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app"
     )
     .ref("counts")
     .child(`${req.query.id}`);
