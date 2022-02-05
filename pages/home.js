@@ -19,7 +19,7 @@ export default function Home({}) {
         </Head>
         <Header pageName={"Rooms"} />
         <StyledMain>
-          <Counter id={user.id}/>
+          <Counter id={user.id} />
           <section>
             Welcome
             <span>

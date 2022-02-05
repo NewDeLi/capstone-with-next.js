@@ -1,37 +1,49 @@
-import { useState, useEffect } from 'react'
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/database'
-import Button from 'react-bootstrap/Button'
+import { useState, useEffect } from "react";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import Button from "react-bootstrap/Button";
 
 const Counter = ({ id }) => {
-    const [count, setCount] = useState('')
-  
-    useEffect(() => {
-        const onCountIncrease = (count) => setCount(count.val())
+  const [count, setCount] = useState("");
 
-        const fetchData = async () => {
-            firebase.database().ref('counts').child(id).on('value', onCountIncrease)
-        }
+  useEffect(() => {
+    const onCountIncrease = (count) => setCount(count.val());
 
-        fetchData()
+    const fetchData = async () => {
+      firebase
+        .database()
+        .ref("counts")
+        .child(`${id}`)
+        .on("value", onCountIncrease);
+    };
 
-        return () => {
-            firebase.database().ref('counts').child(id).off('value', onCountIncrease)
-        }
-    }, [id])
+    fetchData();
 
-    const increaseCount = async () => {
-        const registerCount = () => fetch(`/api/incrementCount?id=${encodeURIComponent(id)}`)
-        registerCount()
-    }
- 
+    return () => {
+      firebase
+        .database()
+        .ref("counts")
+        .child(`${id}`)
+        .off("value", onCountIncrease);
+    };
+  }, [id]);
 
-    return (
-        <div style={{ margin: '5px 0' }}>
-            <Button onClick={increaseCount} style={{ width: '100%' }}>Increase count</Button>
-            <h5 style={{ textAlign: 'center', marginTop: '5px' }}>{count ? count : '0'}</h5>
-        </div>
-    )
-}
+  const increaseCount = async () => {
+    const registerCount = () =>
+      fetch(`/api/incrementCount?id=${encodeURIComponent(id)}`);
+    registerCount();
+  };
 
-export default Counter
+  return (
+    <div style={{ margin: "5px 0" }}>
+      <Button onClick={increaseCount} style={{ width: "100%" }}>
+        Increase count
+      </Button>
+      <h5 style={{ textAlign: "center", marginTop: "5px" }}>
+        {count ? count : "0"}
+      </h5>
+    </div>
+  );
+};
+
+export default Counter;
