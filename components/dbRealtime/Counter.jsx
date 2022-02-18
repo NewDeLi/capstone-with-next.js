@@ -12,7 +12,7 @@ const Counter = ({ id }) => {
 
     const fetchData = async () => {
       firebase
-        .database()
+        .database("https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app")
         .ref("counts")
         .child(`${id}`)
         .on("value", onCountIncrease);
@@ -22,7 +22,7 @@ const Counter = ({ id }) => {
 
     return () => {
       firebase
-        .database()
+        .database("https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app")
         .ref("counts")
         .child(`${id}`)
         .off("value", onCountIncrease);
