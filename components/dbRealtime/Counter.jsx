@@ -14,7 +14,7 @@ const Counter = ({ id }) => {
         .database()
         .ref("counts")
         .child(`${id}`)
-        .on("value", onCountIncrease);
+        .on("value", onCountIncrease());
     };
 
     fetchData();
@@ -24,7 +24,7 @@ const Counter = ({ id }) => {
         .database()
         .ref("counts")
         .child(`${id}`)
-        .off("value", onCountIncrease);
+        .off("value", onCountIncrease());
     };
   }, [id]);
 

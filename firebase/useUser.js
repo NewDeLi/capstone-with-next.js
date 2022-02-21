@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import initFirebase from "../firebase/config";
+import initFirebase from "./config";
 import {
   removeUserCookie,
   setUserCookie,
