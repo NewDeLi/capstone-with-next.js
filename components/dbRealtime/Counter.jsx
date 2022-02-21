@@ -3,7 +3,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Button from "react-bootstrap/Button";
 
-
 const Counter = ({ id }) => {
   const [count, setCount] = useState("");
 
@@ -12,7 +11,7 @@ const Counter = ({ id }) => {
 
     const fetchData = async () => {
       firebase
-        .database("https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app")
+        .database()
         .ref("counts")
         .child(`${id}`)
         .on("value", onCountIncrease);
@@ -22,7 +21,7 @@ const Counter = ({ id }) => {
 
     return () => {
       firebase
-        .database("https://decisions-3fadc-default-rtdb.europe-west1.firebasedatabase.app")
+        .database()
         .ref("counts")
         .child(`${id}`)
         .off("value", onCountIncrease);
