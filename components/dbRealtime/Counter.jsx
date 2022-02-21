@@ -13,7 +13,7 @@ const Counter = ({ id }) => {
       firebase
         .database()
         .ref("counts")
-        .child(`${id}`)
+        .child('testId')//`${id}`
         .on("value", onCountIncrease());
     };
 
@@ -23,14 +23,14 @@ const Counter = ({ id }) => {
       firebase
         .database()
         .ref("counts")
-        .child(`${id}`)
+        .child('testId')
         .off("value", onCountIncrease());
     };
   }, [id]);
 
   const increaseCount = async () => {
     const registerCount = () =>
-      fetch(`../../pages/api/incrementCount?id=${encodeURIComponent(id)}`);
+     await fetch(`../../pages/api/incrementCount`);//?id=${encodeURIComponent(id)}
     registerCount();
   };
 
