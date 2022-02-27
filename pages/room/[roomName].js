@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { OptionFormList } from "../../components/OptionFormList";
-import VoteCard from "../../components/VoteCard";
-import Result from "../../components/Result";
+import { OptionFormList } from "../../components/dbFirestore/OptionFormList";
+import VoteCard from "../../components/dbFirestore/VoteCard";
+import Result from "../../components/dbFirestore/Result";
 import Link from "next/link";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
@@ -9,7 +9,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import initFirebase from "../../firebase/config.js";
+import initFirebase from "../../firebase/config";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 initFirebase();
 
@@ -18,6 +21,32 @@ const AddCard = () => {
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
   const [showCreate, setShowCreate] = useState(true);
+
+  //use collection of inputs in firestore "optionsObjects" , which was written to firestore in optionformlist, to update option data
+  const [options] = useCollectionData(
+    firebase.firestore().collection("optionObjects")
+  );
+
+  const optionsCollection = options?.map((optionList) => {
+    return optionList.optionObject;
+  });
+
+  const updateCountYes = (id, newValue) => {
+    for (let i in optionsCollection) {
+      if (optionsCollection[i].id == id) {
+        optionsCollection[i].countYes = newValue;
+        break;
+      }
+    }
+  };
+  const updateCountNo = (id, newValue) => {
+    for (let i in optionsCollection) {
+      if (optionsCollection[i].id == id) {
+        optionsCollection[i].countNo = newValue;
+        break;
+      }
+    }
+  };
 
   if (showCreate) {
     return (
@@ -51,15 +80,23 @@ const AddCard = () => {
         <Swiper
           modules={[Pagination]}
           pagination={true}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
           className="mySwiper"
         >
           <SwiperSlide>
-            <VoteCard inputs={inputs} setInputs={setInputs} />
+            <VoteCard
+              optionsCollection={optionsCollection}
+              updateCountYes={updateCountYes}
+              updateCountNo={updateCountNo}
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <Result inputs={inputs} />
+            <Result
+              optionsCollection={optionsCollection}
+              updateCountYes={updateCountYes}
+              updateCountNo={updateCountNo}
+            />
           </SwiperSlide>
         </Swiper>
       </StyledMain>

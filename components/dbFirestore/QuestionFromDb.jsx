@@ -18,7 +18,6 @@ export default function QuestionFromDb() {
             value: doc.data().question[0].value,
           };
           setRoomQuestion([fetchedQuestion]);
-          console.log(fetchedQuestion);
         });
     } catch (error) {
       console.log(error);

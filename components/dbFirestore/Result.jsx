@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
-import { Header } from "./Header";
+import { Header } from "../Header";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
-import QuestionFromDb from "./dbFirestore/QuestionFromDb";
+import QuestionFromDb from "./QuestionFromDb";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+export default function Result({
+  optionsCollection,
+  updateCountYes,
+  updateCountNo,
+}) {
+  //update current voting status
+  useEffect(() => {
+    try {
+      optionsCollection?.map((optionObject) => {
+        firebase
+          .firestore()
+          .collection("optionObjects")
+          .doc(`${optionObject.id}`)
+          .onSnapshot((doc) => {
+            const yesSir = doc.data().optionObject.countYes;
+            const noSir = doc.data().optionObject.countNo;
+            updateCountYes(optionObject.id, yesSir);
+            updateCountNo(optionObject.id, noSir);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }, [`${optionsCollection}`]);
 
-export default function Result({ inputs }) {
   return (
     <>
       <Head>
@@ -18,11 +44,11 @@ export default function Result({ inputs }) {
       <StyledBar>
         <Bar
           data={{
-            labels: inputs.map(({ value }) => value),
+            labels: optionsCollection?.map(({ value }) => value),
             datasets: [
               {
                 label: "yes",
-                data: inputs.map(({ countYes }) => countYes),
+                data: optionsCollection?.map(({ countYes }) => countYes),
                 backgroundColor: "#56a8e1",
                 borderColor: "#56a8e1",
                 color: "#606060",
@@ -31,7 +57,7 @@ export default function Result({ inputs }) {
               },
               {
                 label: "no",
-                data: inputs.map(({ countNo }) => countNo),
+                data: optionsCollection?.map(({ countNo }) => countNo),
                 backgroundColor: "#56a7e14e",
                 borderColor: "#56a7e14e",
                 color: "#606060",

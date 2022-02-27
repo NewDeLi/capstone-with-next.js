@@ -4,7 +4,7 @@ import "firebase/compat/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { setUserCookie } from "../../firebase/userCookies";
 import { mapUserData } from "../../firebase/mapUserData";
-import "../../out/home"
+
 
 initFirebase();
 

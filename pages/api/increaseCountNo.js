@@ -1,10 +1,10 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
-const incrementCount = async (req, res) => {
-  const ref = firebase.database().ref("counts").child('testId'); //`${req.query.id}`
+const increaseCountNo = async (req, res) => {
+  const ref = firebase.database().ref("countsNo").child(`${req.query.id}`); //
   const { snapshot } = await ref.transaction((count) => {
-    if (count === null) {
+    if (count === 0) {
       return 1;
     }
 
@@ -16,4 +16,4 @@ const incrementCount = async (req, res) => {
   });
 };
 
-export default incrementCount;
+export default increaseCountNo;

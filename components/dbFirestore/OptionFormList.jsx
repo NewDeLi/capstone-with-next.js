@@ -2,8 +2,9 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Head from "next/head";
-import { Header } from "./Header";
-import QuestionFromDb from "./dbFirestore/QuestionFromDb";
+import { Header } from "../Header";
+import QuestionFromDb from "./QuestionFromDb";
+import firebase from "firebase/compat/app";
 
 export const OptionFormList = ({
   inputs,
@@ -11,25 +12,43 @@ export const OptionFormList = ({
   showCreate,
   setShowCreate,
 }) => {
-  //handle conditional rendering and input value changes
+  //handle value changes
   const handleToggle = () => {
     setShowCreate(!showCreate);
   };
+
+  const sendInputValueToDb = async (id) => {
+    try {
+      await inputs.map((optionObject) => {
+        if (optionObject.id == id) {
+          firebase
+            .firestore()
+            .collection("optionObjects")
+            .doc(`${optionObject.id}`)
+            .set({ optionObject });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
+
   const handleOnChange = (event, id) => {
     event.preventDefault();
     const value = event.target.value;
     const foundInput = inputs.find((input) => input.id === id);
     foundInput.value = value;
     setInputs([...inputs]);
+    sendInputValueToDb(id);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setInputs([...inputs]);
     handleToggle();
   };
 
-  //handle number of input fields with create and remove
+  //handle form changes
   const handleCreate = () => {
     const id = uuidv4();
     const newOptionInput = {
@@ -40,6 +59,7 @@ export const OptionFormList = ({
     };
     setInputs([...inputs, newOptionInput]);
   };
+
   const handleRemove = (id) => {
     setInputs(inputs.filter((input) => input.id !== id));
   };
@@ -68,7 +88,7 @@ export const OptionFormList = ({
                   <ScreenReaderOnly>New option</ScreenReaderOnly>
                   <input
                     type="text"
-                    placeholder="write Question here"
+                    placeholder="write Option here"
                     onChange={(event) => handleOnChange(event, input.id)}
                     value={input.value}
                   />
@@ -129,5 +149,3 @@ const ScreenReaderOnly = styled.span`
   width: 1px;
   font-size: 1px;
 `;
-/*bug to fix when I have time: if there is only one input and the
-user presses minus there is no way to create a new input*/
