@@ -20,7 +20,7 @@ export default function VoteCard({
             .firestore()
             .collection("optionObjects")
             .doc(`${optionObject.id}`)
-            .set({ optionObject })
+            .set({ optionObject });
         }
       });
     } catch (error) {
@@ -29,21 +29,15 @@ export default function VoteCard({
     }
   };
 
-  const increaseCountYes = async (id) => {
-    const response = await fetch(
-      `/api/increaseCountYes?id=${encodeURIComponent(id)}`
-    );
-    const fetched = await response.json();
-    updateCountYes(id, fetched.total);
+  const increaseCountYes = (id, count) => {
+    const newCount = count + 1;
+    updateCountYes(id, newCount);
     sendData2(id);
   };
 
-  const increaseCountNo = async (id) => {
-    const response = await fetch(
-      `/api/increaseCountNo?id=${encodeURIComponent(id)}`
-    );
-    const fetched = await response.json();
-    updateCountNo(id, fetched.total);
+  const increaseCountNo = (id, count) => {
+    const newCount = count + 1;
+    updateCountNo(id, newCount);
     sendData2(id);
   };
 
@@ -58,11 +52,15 @@ export default function VoteCard({
         {optionsCollection?.map((option) => {
           return (
             <ListItem key={option.id}>
-              <button onClick={() => increaseCountNo(option.id)}>
+              <button
+                onClick={() => increaseCountNo(option.id, option.countNo)}
+              >
                 <img src="/Icon/thumbsDown.svg" height="25px" width="25px" />
               </button>
               <p>{option.value}</p>
-              <button onClick={() => increaseCountYes(option.id)}>
+              <button
+                onClick={() => increaseCountYes(option.id, option.countYes)}
+              >
                 <img src="/Icon/thumbsUp.svg" height="25px" width="25px" />
               </button>
             </ListItem>
