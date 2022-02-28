@@ -3,21 +3,27 @@ import router from "next/router";
 import styled from "styled-components";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import { useUser } from "../../firebase/useUser";
 
-export default function CreateRoom({ question, setQuestion }) {
-  const { user } = useUser();
+export default function CreateRoom({
+  questionCollection,
+  updateQuestionCollection,
+  user,
+}) {
   //write question data to firestore database
-  const sendData = async () => {
+  const sendData = () => {
     try {
-      await firebase
-        .firestore()
-        .collection("createRoom")
-        .doc("question")
-        .set({
-          question: [{ id: user.id, value: `${question}` }],
-        })
-        .then(alert("data send to cloud"));
+      questionCollection.map((questionObject) => {
+        if (questionObject.id == user.id) {
+          firebase
+            .firestore()
+            .collection("createRoom")
+            .doc(`${user.id}`)
+            .set({
+              question: { id: user.id, value: questionObject.value },
+            })
+            .then(alert("data send to cloud"));
+        }
+      });
     } catch (error) {
       console.log(error);
       alert(error);
@@ -29,10 +35,10 @@ export default function CreateRoom({ question, setQuestion }) {
       firebase
         .firestore()
         .collection("createRoom")
-        .doc("question")
+        .doc(`${user.id}`)
         .onSnapshot(function (doc) {
-          const roomName = doc.data().question[0].id;
-          router.push(`/room/${roomName}`);
+          const roomName = doc.data()?.question.id;
+          router.push(`/room/${roomName}?id=${roomName}`);
         });
       alert("data fetched from firestore");
     } catch (error) {
@@ -56,7 +62,9 @@ export default function CreateRoom({ question, setQuestion }) {
             type="text"
             name="createRoom"
             placeholder="room id: question here"
-            onChange={(event) => setQuestion(event.target.value)}
+            onChange={(event) =>
+              updateQuestionCollection(user.id, event.target.value)
+            }
           />
         </label>
         <StyledButton type="submit">Create</StyledButton>

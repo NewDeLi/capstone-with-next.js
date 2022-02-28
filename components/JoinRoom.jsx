@@ -9,7 +9,7 @@ export default function JoinRoom() {
         onSubmit={(event) => {
           event.preventDefault();
           const roomName = event.target.elements.newRoom.value;
-          router.push(`/room/${roomName}`);
+          router.push(`/room/${roomName}?id=${roomName}`);
         }}
       >
         <label>

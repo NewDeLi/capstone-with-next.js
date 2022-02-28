@@ -1,38 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import styled from "styled-components";
+import { useQuestion } from "../../firebase/useQuestion";
+import { useRouter } from "next/router";
 
 export default function QuestionFromDb() {
-  const [roomQuestion, setRoomQuestion] = useState([{ id: "", value: "" }]);
+  const { questionCollection, updateQuestionCollection } = useQuestion();
+  const { query } = useRouter();
+  const roomID = query.id;
+
   //fetch question data from firestore
   useEffect(() => {
     try {
-      firebase
-        .firestore()
-        .collection("createRoom")
-        .doc("question")
-        .onSnapshot((doc) => {
-          const fetchedQuestion = {
-            id: doc.data().question[0].id, //unique key bug here?
-            value: doc.data().question[0].value,
-          };
-          setRoomQuestion([fetchedQuestion]);
-        });
+      questionCollection?.map((questionObject) => {
+        firebase
+          .firestore()
+          .collection("createRoom")
+          .doc(`${questionObject.id}`)
+          .onSnapshot((doc) => {
+            const fetchedQuestion = doc.data()?.question.value;
+            updateQuestionCollection(questionObject.id, fetchedQuestion);
+          });
+      });
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [roomID]);
   return (
     <StyledSection>
-      {roomQuestion.map((single) => {
-        return (
-          <p key={single.id}>
-            <span>ROOM</span>
-            <a>{single.id}</a>
-            <span>{single.value}</span>
-          </p>
-        );
+      {questionCollection?.map((questionObject) => {
+        if (questionObject.id == roomID) {
+          return (
+            <p key={questionObject.id}>
+              <span>ROOM</span>
+              <a>{questionObject.id}</a>
+              <span>{questionObject.value}</span>
+            </p>
+          );
+        }
       })}
     </StyledSection>
   );

@@ -5,10 +5,10 @@ import Link from "next/link";
 import CreateRoom from "../components/dbFirestore/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
 import { useUser } from "../firebase/useUser";
-import { useState } from "react";
+import { useQuestion } from "../firebase/useQuestion";
 
 export default function Home({}) {
-  const [question, setQuestion] = useState([{ id: "", value: "" }]);
+  const { questionCollection, updateQuestionCollection } = useQuestion();
   const { user, logout } = useUser();
   if (user) {
     return (
@@ -30,7 +30,11 @@ export default function Home({}) {
             </span>
             <br /> Create or join a room.
           </section>
-          <CreateRoom question={question} setQuestion={setQuestion} />
+          <CreateRoom
+            questionCollection={questionCollection}
+            updateQuestionCollection={updateQuestionCollection}
+            user={user}
+          />
           <JoinRoom />
         </StyledMain>
         <StyledNav>
@@ -60,7 +64,7 @@ export default function Home({}) {
           !
           <br /> Create or join a room.
         </p>
-        <CreateRoom question={question} setQuestion={setQuestion} />
+        <CreateRoom />
         <JoinRoom />
       </StyledMain>
       <StyledNav>
