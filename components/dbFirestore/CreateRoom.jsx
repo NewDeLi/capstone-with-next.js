@@ -3,12 +3,36 @@ import router from "next/router";
 import styled from "styled-components";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function CreateRoom({
   questionCollection,
   updateQuestionCollection,
   user,
 }) {
+  //delete options data from firestore
+  const [options] = useCollectionData(
+    firebase.firestore().collection(`${user.id}`)
+  );
+
+  const optionsCollection = options?.map((optionList) => {
+    return optionList.optionObject;
+  });
+
+  const deleteDocsFromDb = () => {
+    try {
+      optionsCollection?.map((optionObject) => {
+        firebase
+          .firestore()
+          .collection(`${user.id}`)
+          .doc(`${optionObject.id}`)
+          .delete();
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
   //write question data to firestore database
   const sendData = () => {
     try {
@@ -67,7 +91,9 @@ export default function CreateRoom({
             }
           />
         </label>
-        <StyledButton type="submit">Create</StyledButton>
+        <StyledButton type="submit" onClick={deleteDocsFromDb}>
+          Create
+        </StyledButton>
       </StyledForm>
     </>
   );

@@ -21,8 +21,8 @@ export default function Result({
           .collection(`${roomID}`)
           .doc(`${optionObject.id}`)
           .onSnapshot((doc) => {
-            const yesSir = doc.data().optionObject.countYes;
-            const noSir = doc.data().optionObject.countNo;
+            const yesSir = doc.data()?.optionObject.countYes;
+            const noSir = doc.data()?.optionObject.countNo;
             updateCountYes(optionObject.id, yesSir);
             updateCountNo(optionObject.id, noSir);
           });

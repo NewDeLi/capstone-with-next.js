@@ -31,10 +31,7 @@ const AddCard = () => {
   );
 
   const optionsCollection = options?.map((optionList) => {
-    // for (let i in optionList.optionObjects) {
-    //   return optionList.optionObjects[i];
-    // }
-    return optionList.optionObject; //for loop in map function einbauen?
+    return optionList.optionObject;
   });
 
   const updateCountYes = (id, newValue) => {

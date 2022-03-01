@@ -12,15 +12,13 @@ export default function VoteCard({
   updateCountNo,
   roomID,
 }) {
-  //increase count with incrementCount/decreaseCount api
   const sendData2 = (id) => {
     try {
       optionsCollection?.map((optionObject) => {
         if (optionObject.id == id) {
           firebase
             .firestore()
-            .collection(`${roomID}`) //TO-DO put in room-id in here and reset code from github votecard, result, roomname, optionformlist!!!!!
-            .doc(`${optionObject.id}`)
+            .collection(`${roomID}`)
             .update({ optionObject: optionObject });
         }
       });
