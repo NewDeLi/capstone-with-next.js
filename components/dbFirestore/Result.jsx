@@ -5,7 +5,8 @@ import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import QuestionFromDb from "./QuestionFromDb";
 import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import "firebase/compat/firestore";
+
 export default function Result({
   optionsCollection,
   updateCountYes,

@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import ListItem from "../ListItem";
 import QuestionFromDb from "./QuestionFromDb";
 import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import "firebase/compat/firestore";
 
 export default function VoteCard({
   optionsCollection,
@@ -25,7 +25,8 @@ export default function VoteCard({
           firebase
             .firestore()
             .collection(`${roomID}`)
-            .set({ optionObject: optionObject });
+            .doc(`${optionObject.id}`)
+            .update({ optionObject: optionObject });
         }
       });
     } catch (error) {

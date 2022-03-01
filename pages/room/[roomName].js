@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import initFirebase from "../../firebase/config";
 import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import "firebase/compat/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 
