@@ -25,7 +25,7 @@ export default function VoteCard({
           firebase
             .firestore()
             .collection(`${roomID}`)
-            .update({ optionObject: optionObject });
+            .set({ optionObject: optionObject });
         }
       });
     } catch (error) {
