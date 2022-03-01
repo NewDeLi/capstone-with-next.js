@@ -10,17 +10,18 @@ export default function VoteCard({
   optionsCollection,
   updateCountYes,
   updateCountNo,
+  roomID,
 }) {
   //increase count with incrementCount/decreaseCount api
   const sendData2 = (id) => {
     try {
-      optionsCollection.map((optionObject) => {
+      optionsCollection?.map((optionObject) => {
         if (optionObject.id == id) {
           firebase
             .firestore()
-            .collection("optionObjects")
+            .collection(`${roomID}`) //TO-DO put in room-id in here and reset code from github votecard, result, roomname, optionformlist!!!!!
             .doc(`${optionObject.id}`)
-            .set({ optionObject });
+            .update({ optionObject: optionObject });
         }
       });
     } catch (error) {
@@ -47,24 +48,29 @@ export default function VoteCard({
         <title>Vote</title>
       </Head>
       <Header pageName={"VOTE"} />
-      <QuestionFromDb />
+
+      <QuestionFromDb roomID={roomID} />
+
       <ul>
         {optionsCollection?.map((option) => {
-          return (
-            <ListItem key={option.id}>
-              <button
-                onClick={() => increaseCountNo(option.id, option.countNo)}
-              >
-                <img src="/Icon/thumbsDown.svg" height="25px" width="25px" />
-              </button>
-              <p>{option.value}</p>
-              <button
-                onClick={() => increaseCountYes(option.id, option.countYes)}
-              >
-                <img src="/Icon/thumbsUp.svg" height="25px" width="25px" />
-              </button>
-            </ListItem>
-          );
+          if (option.id == option.id) {
+            //note: option.id is equal firebase.firestore().collection().doc().id
+            return (
+              <ListItem key={option.id}>
+                <button
+                  onClick={() => increaseCountNo(option.id, option.countNo)}
+                >
+                  <img src="/Icon/thumbsDown.svg" height="25px" width="25px" />
+                </button>
+                <p>{option.value}</p>
+                <button
+                  onClick={() => increaseCountYes(option.id, option.countYes)}
+                >
+                  <img src="/Icon/thumbsUp.svg" height="25px" width="25px" />
+                </button>
+              </ListItem>
+            );
+          }
         })}
       </ul>
     </>

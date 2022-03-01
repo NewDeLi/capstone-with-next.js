@@ -3,14 +3,11 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import styled from "styled-components";
 import { useQuestion } from "../../firebase/useQuestion";
-import { useRouter } from "next/router";
 
-export default function QuestionFromDb() {
+
+export default function QuestionFromDb({ roomID }) {
   const { questionCollection, updateQuestionCollection } = useQuestion();
-  const { query } = useRouter();
-  const roomID = query.id;
 
-  //fetch question data from firestore
   useEffect(() => {
     try {
       questionCollection?.map((questionObject) => {

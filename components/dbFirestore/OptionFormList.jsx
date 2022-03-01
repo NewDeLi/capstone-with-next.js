@@ -11,6 +11,7 @@ export const OptionFormList = ({
   setInputs,
   showCreate,
   setShowCreate,
+  roomID,
 }) => {
   //handle value changes
   const handleToggle = () => {
@@ -23,9 +24,9 @@ export const OptionFormList = ({
         if (optionObject.id == id) {
           firebase
             .firestore()
-            .collection("optionObjects")
+            .collection(`${roomID}`)
             .doc(`${optionObject.id}`)
-            .set({ optionObject });
+            .set({ optionObject: optionObject });
         }
       });
     } catch (error) {
@@ -71,7 +72,7 @@ export const OptionFormList = ({
       </Head>
 
       <Header pageName={"CREATE"} />
-      <QuestionFromDb />
+      <QuestionFromDb roomID={roomID} />
       <form onSubmit={handleSubmit}>
         <ul>
           {inputs.map((input) => {

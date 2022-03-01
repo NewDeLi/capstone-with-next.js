@@ -10,14 +10,15 @@ export default function Result({
   optionsCollection,
   updateCountYes,
   updateCountNo,
+  roomID,
 }) {
-  //update current voting status
+  // update current voting status
   useEffect(() => {
     try {
       optionsCollection?.map((optionObject) => {
         firebase
           .firestore()
-          .collection("optionObjects")
+          .collection(`${roomID}`)
           .doc(`${optionObject.id}`)
           .onSnapshot((doc) => {
             const yesSir = doc.data().optionObject.countYes;
@@ -40,7 +41,7 @@ export default function Result({
 
       <Header pageName={"RESULTS"} />
 
-      <QuestionFromDb />
+      <QuestionFromDb roomID={roomID} />
       <StyledBar>
         <Bar
           data={{

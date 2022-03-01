@@ -13,6 +13,7 @@ import initFirebase from "../../firebase/config";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useRouter } from "next/router";
 
 initFirebase();
 
@@ -22,13 +23,18 @@ const AddCard = () => {
   ]);
   const [showCreate, setShowCreate] = useState(true);
 
+  const { query } = useRouter();
+  const roomID = query.id;
   //use collection of inputs in firestore "optionsObjects" , which was written to firestore in optionformlist, to update option data
   const [options] = useCollectionData(
-    firebase.firestore().collection("optionObjects")
+    firebase.firestore().collection(`${roomID}`)
   );
 
   const optionsCollection = options?.map((optionList) => {
-    return optionList.optionObject;
+    // for (let i in optionList.optionObjects) {
+    //   return optionList.optionObjects[i];
+    // }
+    return optionList.optionObject; //for loop in map function einbauen?
   });
 
   const updateCountYes = (id, newValue) => {
@@ -57,6 +63,7 @@ const AddCard = () => {
             setInputs={setInputs}
             showCreate={showCreate}
             setShowCreate={setShowCreate}
+            roomID={roomID}
           />
         </StyledMain>
         <StyledNav>
@@ -89,6 +96,7 @@ const AddCard = () => {
               optionsCollection={optionsCollection}
               updateCountYes={updateCountYes}
               updateCountNo={updateCountNo}
+              roomID={roomID}
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -96,6 +104,7 @@ const AddCard = () => {
               optionsCollection={optionsCollection}
               updateCountYes={updateCountYes}
               updateCountNo={updateCountNo}
+              roomID={roomID}
             />
           </SwiperSlide>
         </Swiper>
