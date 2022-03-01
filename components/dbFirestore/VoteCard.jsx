@@ -11,7 +11,13 @@ export default function VoteCard({
   updateCountYes,
   updateCountNo,
   roomID,
+  showCreate,
+  setShowCreate,
 }) {
+  const handleToggelBack = () => {
+    setShowCreate(!showCreate);
+  };
+
   const sendData2 = (id) => {
     try {
       optionsCollection?.map((optionObject) => {
@@ -71,6 +77,7 @@ export default function VoteCard({
           }
         })}
       </ul>
+      <a onClick={handleToggelBack}>toggelback</a>
     </>
   );
 }

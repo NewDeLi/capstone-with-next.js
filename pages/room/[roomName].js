@@ -94,6 +94,8 @@ const AddCard = () => {
               updateCountYes={updateCountYes}
               updateCountNo={updateCountNo}
               roomID={roomID}
+              showCreate={showCreate}
+              setShowCreate={setShowCreate}
             />
           </SwiperSlide>
           <SwiperSlide>

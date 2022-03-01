@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import styled from "styled-components";
 import { useQuestion } from "../../firebase/useQuestion";
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function QuestionFromDb({ roomID }) {
   const { questionCollection, updateQuestionCollection } = useQuestion();
@@ -31,7 +31,12 @@ export default function QuestionFromDb({ roomID }) {
           return (
             <p key={questionObject.id}>
               <span>ROOM</span>
-              <a>{questionObject.id}</a>
+              <a>
+                {questionObject.id}
+                <CopyToClipboard text={questionObject.id}>
+                  <button onClick={() => alert("copied")}>copy me</button>
+                </CopyToClipboard>
+              </a>
               <span>{questionObject.value}</span>
             </p>
           );
