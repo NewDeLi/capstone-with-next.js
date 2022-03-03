@@ -1,6 +1,4 @@
 import React from "react";
-import Head from "next/head";
-import { Header } from "../Header";
 import ListItem from "../ListItem";
 import QuestionFromDb from "./QuestionFromDb";
 import firebase from "firebase/compat/app";
@@ -49,11 +47,6 @@ export default function VoteCard({
 
   return (
     <>
-      <Head>
-        <title>Vote</title>
-      </Head>
-      <Header pageName={"VOTE"} />
-
       <QuestionFromDb roomID={roomID} />
 
       <ul>

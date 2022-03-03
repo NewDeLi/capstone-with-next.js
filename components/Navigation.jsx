@@ -5,32 +5,23 @@ export const Navigation = () => {
   return (
     <StyledNav>
       <li>
-        <Link href="/">
-          <a>
-            <img src="/Icon/Home.svg" alt="home" width="50px" height="50px" />
-          </a>
-        </Link>
-      </li>
-      <li>
-        <Link href={"/addCard"}>
-          <a>
-            <img src="/Icon/Plus.svg" alt="add" width="50px" height="50px" />
-          </a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/enterVote">
-          <a>
-            <img src="/Icon/vote.png" alt="vote" width="50px" height="50px" />
-          </a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/showResults">
+        <Link href="/home">
           <a>
             <img
-              src="/Icon/Results.svg"
-              alt="results"
+              src="/Icon/Home_grey.svg"
+              alt="home"
+              width="50px"
+              height="50px"
+            />
+          </a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/" onClick={() => logout()}>
+          <a>
+            <img
+              src="/Icon/Logout-01.svg"
+              alt="home"
               width="50px"
               height="50px"
             />
@@ -47,13 +38,14 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.25rem;
+  gap: 30vw;
   list-style-type: none;
-  position: absolute;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  right: 0;
-  border-top: 0.5px solid black;
+  width: 100vw;
+  margin: 2vh auto 0 auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 16px var(--fixed-color-one);
   background-color: white;
-  padding: 1rem;
+  height: 11vh;
 `;

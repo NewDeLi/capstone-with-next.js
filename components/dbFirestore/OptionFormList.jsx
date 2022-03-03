@@ -1,8 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import Head from "next/head";
-import { Header } from "../Header";
 import QuestionFromDb from "./QuestionFromDb";
 import firebase from "firebase/compat/app";
 
@@ -67,79 +65,82 @@ export const OptionFormList = ({
 
   return (
     <>
-      <Head>
-        <title>Create</title>
-      </Head>
-
-      <Header pageName={"CREATE"} />
       <QuestionFromDb roomID={roomID} />
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {inputs.map((input) => {
-            return (
-              <StyledList key={input.id}>
-                <img
-                  src="/Icon/remove_white.svg"
-                  alt="delete option"
-                  width="25px"
-                  height="25px"
-                  onClick={() => handleRemove(input.id)}
-                />
-                <label>
-                  <ScreenReaderOnly>New option</ScreenReaderOnly>
-                  <input
-                    type="text"
-                    placeholder="write Option here"
-                    onChange={(event) => handleOnChange(event, input.id)}
-                    value={input.value}
+      <StyledSection>
+        <form onSubmit={handleSubmit}>
+          <ul>
+            {inputs.map((input) => {
+              return (
+                <StyledList key={input.id}>
+                  <img
+                    src="/Icon/remove_white.svg"
+                    alt="delete option"
+                    width="25px"
+                    height="25px"
+                    onClick={() => handleRemove(input.id)}
                   />
-                </label>
-                <img
-                  src="/Icon/add_white.svg"
-                  alt="add option"
-                  width="25px"
-                  height="25px"
-                  onClick={handleCreate}
-                />
-              </StyledList>
-            );
-          })}
-        </ul>
-        <StyledButton type="submit">Vote</StyledButton>
-      </form>
+                  <label>
+                    <ScreenReaderOnly>New option</ScreenReaderOnly>
+                    <input
+                      type="text"
+                      placeholder="write Option here"
+                      onChange={(event) => handleOnChange(event, input.id)}
+                      value={input.value}
+                    />
+                  </label>
+                  <img
+                    src="/Icon/add_white.svg"
+                    alt="add option"
+                    width="25px"
+                    height="25px"
+                    onClick={handleCreate}
+                  />
+                </StyledList>
+              );
+            })}
+          </ul>
+          <StyledButton type="submit">Vote</StyledButton>
+        </form>
+      </StyledSection>
     </>
   );
 };
-
+const StyledSection = styled.section`
+  height: 100vh;
+  overflow-y: scroll;
+  ul {
+    padding: 0;
+  }
+`;
 const StyledList = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin: 2rem;
-  font-size: 1.5rem;
   input {
     height: 2rem;
-    width: 60vw;
-    padding: 1vh auto;
-    border: 2.5px solid #606060;
+    width: 50vw;
+    border: 2.5px solid var(--fixed-color-two);
     border-radius: 5px;
   }
   img {
-    background-color: #56a8e1;
+    background-color: var(--fixed-color-two);
     border-radius: 100%;
   }
 `;
 const StyledButton = styled.button`
   all: unset;
-  border-radius: 15px;
-  font-size: 1.5rem;
-  width: 60vw;
+  border-radius: 5px;
+  border: 5px solid var(--fixed-color-two);
+  box-shadow: 0px 0px 8px var(--fixed-color-two);
+  font-size: 1.25rem;
+  width: 50vw;
   margin: 1rem auto;
-  background-color: #56a8e1;
-  color: white;
+  background-color: var(--fixed-color-two);
+  color: var(--fixed-background);
   letter-spacing: 2px;
 `;
+
 const ScreenReaderOnly = styled.span`
   display: inline-block;
   border: 0;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import Head from "next/head";
+import { Header } from "../../components/Header";
+import { Navigation } from "../../components/Navigation";
 import { OptionFormList } from "../../components/dbFirestore/OptionFormList";
 import VoteCard from "../../components/dbFirestore/VoteCard";
 import Result from "../../components/dbFirestore/Result";
-import Link from "next/link";
-import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -14,14 +15,18 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
+import { useUser } from "../../firebase/useUser";
+import styled from "styled-components";
 
 initFirebase();
 
 const AddCard = () => {
+  const { logout } = useUser();
   const [inputs, setInputs] = useState([
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
   const [showCreate, setShowCreate] = useState(true);
+  const [slideChange, setSlideChange] = useState(false);
 
   const { query } = useRouter();
   const roomID = query.id;
@@ -54,7 +59,11 @@ const AddCard = () => {
   if (showCreate) {
     return (
       <>
-        <StyledMain>
+        <Head>
+          <title>Create</title>
+        </Head>
+        <Header pageName={"CREATE"} subHeader={"Add inputs"} />
+        <main>
           <OptionFormList
             inputs={inputs}
             setInputs={setInputs}
@@ -62,30 +71,37 @@ const AddCard = () => {
             setShowCreate={setShowCreate}
             roomID={roomID}
           />
-        </StyledMain>
-        <StyledNav>
-          <Link href="/home">
-            <a>
-              <img
-                src="/Icon/Home_grey.svg"
-                alt="home"
-                width="50px"
-                height="50px"
-              />
-            </a>
-          </Link>
-        </StyledNav>
+        </main>
+        <Navigation logout={logout} />
       </>
     );
   }
   return (
     <>
-      <StyledMain>
+      {slideChange ? (
+        <>
+          <Head>
+            <title>Vote</title>
+          </Head>
+          <Header pageName={"VOTE"} subHeader={"give a vote for each"} />
+        </>
+      ) : (
+        <>
+          <Head>
+            <title>Results</title>
+          </Head>
+          <Header
+            pageName={"RESULTS"}
+            subHeader={"check the election results"}
+          />
+        </>
+      )}
+      <main>
+        <StyledSection>
         <Swiper
           modules={[Pagination]}
           pagination={true}
-          // onSlideChange={() => console.log("slide change")}
-          // onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => setSlideChange(!slideChange)}
           className="mySwiper"
         >
           <SwiperSlide>
@@ -107,31 +123,14 @@ const AddCard = () => {
             />
           </SwiperSlide>
         </Swiper>
-      </StyledMain>
-      <StyledNav>
-        <Link href="/home">
-          <a>
-            <img
-              src="/Icon/Home_grey.svg"
-              alt="home"
-              width="50px"
-              height="50px"
-            />
-          </a>
-        </Link>
-      </StyledNav>
+        </StyledSection>
+      </main>
+      <Navigation logout={logout} />
     </>
   );
 };
 export default AddCard;
 
-const StyledNav = styled.nav`
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  margin: 2.5vh auto;
-`;
-const StyledMain = styled.main`
-  overflow: scroll;
-  height: 90vh;
-`;
+const StyledSection= styled.section`
+overflow-y: scroll
+height: 70vh;`

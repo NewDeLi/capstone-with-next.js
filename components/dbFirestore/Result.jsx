@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
-import { Header } from "../Header";
 import { Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import QuestionFromDb from "./QuestionFromDb";
@@ -36,14 +34,8 @@ export default function Result({
 
   return (
     <>
-      <Head>
-        <title>Results</title>
-      </Head>
-
-      <Header pageName={"RESULTS"} />
-
       <QuestionFromDb roomID={roomID} />
-      <StyledBar>
+      <StyledSection>
         <Bar
           data={{
             labels: optionsCollection?.map(({ value }) => value),
@@ -68,8 +60,6 @@ export default function Result({
               },
             ],
           }}
-          height={200}
-          width={300}
           options={{
             maintainAspectRatio: false,
             indexAxis: "y",
@@ -98,15 +88,16 @@ export default function Result({
             },
           }}
         />
-      </StyledBar>
+      </StyledSection>
     </>
   );
 }
 
-const StyledBar = styled.section`
-  max-width: 100%;
-  width: 90%;
-  height: 50vh;
+const StyledSection = styled.section`
+  /* max-width: 100%;
+  width: 90%; */
+  max-height: 100%;
+  height: 100vh;
   margin: 1vh auto;
   border-radius: 15px;
 `;
