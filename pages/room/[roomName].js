@@ -16,7 +16,6 @@ import "firebase/compat/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 import { useUser } from "../../firebase/useUser";
-import styled from "styled-components";
 
 initFirebase();
 
@@ -26,7 +25,7 @@ const AddCard = () => {
     { id: uuidv4(), value: "", countYes: 0, countNo: 0 },
   ]);
   const [showCreate, setShowCreate] = useState(true);
-  const [slideChange, setSlideChange] = useState(false);
+  const [slideChange, setSlideChange] = useState(true);
 
   const { query } = useRouter();
   const roomID = query.id;
@@ -62,7 +61,7 @@ const AddCard = () => {
         <Head>
           <title>Create</title>
         </Head>
-        <Header pageName={"CREATE"} subHeader={"Add inputs"} />
+        <Header pageName={"CREATE"} subHeader={"Add Vote Card"} />
         <main>
           <OptionFormList
             inputs={inputs}
@@ -83,7 +82,7 @@ const AddCard = () => {
           <Head>
             <title>Vote</title>
           </Head>
-          <Header pageName={"VOTE"} subHeader={"give a vote for each"} />
+          <Header pageName={"VOTE"} subHeader={"One Vote for each Card"} />
         </>
       ) : (
         <>
@@ -92,12 +91,11 @@ const AddCard = () => {
           </Head>
           <Header
             pageName={"RESULTS"}
-            subHeader={"check the election results"}
+            subHeader={"Check the Election Results"}
           />
         </>
       )}
       <main>
-        <StyledSection>
         <Swiper
           modules={[Pagination]}
           pagination={true}
@@ -123,14 +121,9 @@ const AddCard = () => {
             />
           </SwiperSlide>
         </Swiper>
-        </StyledSection>
       </main>
       <Navigation logout={logout} />
     </>
   );
 };
 export default AddCard;
-
-const StyledSection= styled.section`
-overflow-y: scroll
-height: 70vh;`

@@ -25,41 +25,45 @@ export default function QuestionFromDb({ roomID }) {
     }
   }, [roomID]);
   return (
-    <StyledSection>
+    <>
       {questionCollection?.map((questionObject) => {
         if (questionObject.id == roomID) {
           return (
-            <p key={questionObject.id}>
-              <span>ROOM</span>
-              <a>
-                {questionObject.id}
-                <CopyToClipboard text={questionObject.id}>
-                  <button onClick={() => alert("copied")}>copy me</button>
-                </CopyToClipboard>
-              </a>
-              <span>{questionObject.value}</span>
-            </p>
+            <StyledSection key={questionObject.id}>
+              <p>
+                <span>
+                  ROOM-ID {questionObject.id}{" "}
+                  <CopyToClipboard text={questionObject.id}>
+                    <img
+                      src="/icon/copy.svg"
+                      alt="copy room id"
+                      onClick={() => alert("copied")}
+                    />
+                  </CopyToClipboard>
+                </span>
+              </p>
+
+              <p>{questionObject.value}?</p>
+            </StyledSection>
           );
         }
       })}
-    </StyledSection>
+    </>
   );
 }
 
 const StyledSection = styled.section`
-  border: 4px solid #56a8e1;
+  border: 1.5px solid var(--fixed-color-one);
   border-radius: 25px;
-  color: #606060;
-  background-color: white;
-  width: 60%;
-  margin: auto;
-  margin-bottom: 7.5vh;
-  margin-top: 0;
-  padding: 1vh 1vw;
+  color: var(--fixed-color-one);
+  background-color: var(--fixed-background);
+  width: 60vw;
+  margin: 0 auto;
+  padding: 1vh 5vw;
   span {
-    display: block;
-  }
-  a {
-    color: #56a8e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fixed-color-two);
   }
 `;

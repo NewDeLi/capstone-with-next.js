@@ -66,7 +66,7 @@ export const OptionFormList = ({
   return (
     <>
       <QuestionFromDb roomID={roomID} />
-      <StyledSection>
+      <StyledSection className="create">
         <form onSubmit={handleSubmit}>
           <ul>
             {inputs.map((input) => {
@@ -117,10 +117,11 @@ const StyledList = styled.li`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  margin: 1rem 0 1rem 0;
   input {
     height: 2rem;
     width: 50vw;
-    border: 2.5px solid var(--fixed-color-two);
+    border: 1px solid var(--fixed-color-two);
     border-radius: 5px;
   }
   img {
@@ -132,7 +133,6 @@ const StyledButton = styled.button`
   all: unset;
   border-radius: 5px;
   border: 5px solid var(--fixed-color-two);
-  box-shadow: 0px 0px 8px var(--fixed-color-two);
   font-size: 1.25rem;
   width: 50vw;
   margin: 1rem auto;

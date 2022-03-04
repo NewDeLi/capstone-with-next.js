@@ -10,20 +10,30 @@ export default function Index() {
       <Head>
         <title>Login</title>
       </Head>
-      <Header pageName={"DECISIONS"} subHeader={"VOTE WITH ME"} />
-      <styledMain>
-        <StyleSection>
-          <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
-        </StyleSection>
-        <SignInScreen />
-      </styledMain>
+      <Body>
+        <Header
+          pageName={"DECISIONS"}
+          subHeader={"VOTE WITH ME"}
+          className="onlyIndex"
+        />
+        <main>
+          <section>
+            <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
+          </section>
+          <SignInScreen />
+        </main>
+      </Body>
     </>
   );
 }
-const StyleSection = styled.section`
-  margin-bottom: 10vh;
-  img {
-    display: block;
-    margin: 0 auto;
+
+const Body = styled.body`
+  background: var(--fixed-background);
+  section {
+    margin-bottom: 10vh;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
   }
 `;

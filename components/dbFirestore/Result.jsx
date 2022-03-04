@@ -94,10 +94,6 @@ export default function Result({
 }
 
 const StyledSection = styled.section`
-  /* max-width: 100%;
-  width: 90%; */
-  max-height: 100%;
   height: 100vh;
   margin: 1vh auto;
-  border-radius: 15px;
 `;

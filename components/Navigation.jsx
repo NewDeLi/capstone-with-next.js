@@ -39,13 +39,13 @@ const StyledNav = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 30vw;
-  list-style-type: none;
   position: sticky;
   bottom: 0;
   width: 100vw;
   margin: 2vh auto 0 auto;
   border-radius: 5px;
   box-shadow: 0px 0px 16px var(--fixed-color-one);
-  background-color: white;
+  background-color: var(--fixed-background);
   height: 11vh;
+  z-index: 2;
 `;

@@ -16,7 +16,7 @@ export default function Home({}) {
         <Head>
           <title>Home</title>
         </Head>
-        <Header pageName={"Rooms"} subHeader={`Create or join a room`} />
+        <Header pageName={"Rooms"} subHeader={`Create/Join a Room`} />
         <StyledMain>
           <section>
             <span>Welcome </span>

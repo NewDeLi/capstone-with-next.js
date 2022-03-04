@@ -43,8 +43,7 @@ export default function CreateRoom({
             .doc(`${user.id}`)
             .set({
               question: { id: user.id, value: questionObject.value },
-            })
-            .then(alert("data send to cloud"));
+            });
         }
       });
     } catch (error) {
@@ -63,7 +62,6 @@ export default function CreateRoom({
           const roomName = doc.data()?.question.id;
           router.push(`/room/${roomName}?id=${roomName}`);
         });
-      alert("data fetched from firestore");
     } catch (error) {
       console.log(error);
       alert(error);

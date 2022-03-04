@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    background: var(--fixed-background);
+    background: #ecececfd;
   
   };
 
@@ -30,10 +30,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a{
-    color: #ff0000ab;
-    text-decoration: none;
+    color: #56a8e1;
+    display:flex;
+    align-items:center;
   };
-  main{
-    /* margin-top: 25vh; */
-}
+
 `;
