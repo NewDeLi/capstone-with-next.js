@@ -62,7 +62,7 @@ export default function VoteCard({
           <span>
             <a onClick={handleToggelBack}>
               <img
-                src="/icon/reply.svg"
+                src="/Icon/reply.svg"
                 alt="go back to create section"
                 height="25px"
                 width="25px"
@@ -75,7 +75,6 @@ export default function VoteCard({
               //note: option.id is equal firebase.firestore().collection().doc().id
               return (
                 <>
-                  <ListItem></ListItem>
                   <li key={option.id}>
                     <button
                       onClick={() => {

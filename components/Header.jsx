@@ -27,6 +27,8 @@ const StyledHeader = styled.header`
   box-shadow: 0px 0px 16px var(--fixed-color-one);
   &.onlyIndex {
     box-shadow: 0 0 0;
+    margin: 0 auto;
+    padding-top: 10vh;
   }
   h1 {
     letter-spacing: 2px;

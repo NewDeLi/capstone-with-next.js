@@ -35,7 +35,7 @@ export default function QuestionFromDb({ roomID }) {
                   ROOM-ID {questionObject.id}{" "}
                   <CopyToClipboard text={questionObject.id}>
                     <img
-                      src="/icon/copy.svg"
+                      src="/Icon/copy.svg"
                       alt="copy room id"
                       onClick={() => alert("copied")}
                     />
