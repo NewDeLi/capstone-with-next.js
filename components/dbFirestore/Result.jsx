@@ -94,6 +94,6 @@ export default function Result({
 }
 
 const StyledSection = styled.section`
-  height: 100vh;
+  height: 55vh;
   margin: 1vh auto;
 `;

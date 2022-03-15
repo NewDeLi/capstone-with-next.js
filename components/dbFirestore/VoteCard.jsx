@@ -87,10 +87,6 @@ export default function VoteCard({
                         height="25px"
                         width="25px"
                         className={boxClassName}
-                        onClick={() => {
-                          console.log(isClicked);
-                          return increaseCountNo(option.id, option.countNo);
-                        }}
                       />
                     </button>
                     <p>{option.value}</p>

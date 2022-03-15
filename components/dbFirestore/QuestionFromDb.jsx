@@ -32,14 +32,14 @@ export default function QuestionFromDb({ roomID }) {
             <StyledSection key={questionObject.id}>
               <p>
                 <span>
-                  ROOM-ID {questionObject.id}{" "}
-                  <CopyToClipboard text={questionObject.id}>
+                  ROOM-ID   <CopyToClipboard text={questionObject.id}>
                     <img
                       src="/Icon/copy.svg"
                       alt="copy room id"
                       onClick={() => alert("copied")}
                     />
-                  </CopyToClipboard>
+                  </CopyToClipboard> </span> <span>{questionObject.id}
+               
                 </span>
               </p>
 

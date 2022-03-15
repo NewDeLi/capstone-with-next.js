@@ -10,6 +10,7 @@ import { Navigation } from "../components/Navigation";
 export default function Home({}) {
   const { questionCollection, updateQuestionCollection } = useQuestion();
   const { user, logout } = useUser();
+  console.log(user.email)
   if (user) {
     return (
       <>
@@ -60,6 +61,7 @@ export default function Home({}) {
 const StyledMain = styled.main`
   color: var(--fixed-color-one);
   text-align: center;
+  height: 100vh;
   section {
     border: 1px solid var(--fixed-color-one);
     box-shadow: 0px 0px 16px white;
