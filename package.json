@@ -9,6 +9,10 @@
     "export": "next export"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.7.0",
+    "@mui/styled-engine-sc": "^5.7.0",
     "chart.js": "^3.6.0",
     "firebase": "^9.6.1",
     "firebase-admin": "^10.0.1",
@@ -23,7 +27,8 @@
     "react-firebase-hooks": "^4.0.2",
     "react-firebaseui": "^6.0.0",
     "react-router-dom": "^6.0.2",
-    "styled-components": "^5.3.3",
+    "react-tinder-card": "^1.4.5",
+    "styled-components": "^5.3.5",
     "swiper": "^7.3.3",
     "uuidv4": "^6.2.12"
   },

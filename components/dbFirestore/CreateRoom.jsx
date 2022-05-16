@@ -2,28 +2,21 @@ import React from "react";
 import router from "next/router";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function CreateRoom({
-  questionCollection,
-  updateQuestionCollection,
   user,
+  nameOfRoom,
+  setNameOfRoom,
+  roomInputsDb,
 }) {
   //delete options data from firestore
-  const [options] = useCollectionData(
-    firebase.firestore().collection(`${user.id}`)
-  );
 
-  const optionsCollection = options?.map((optionList) => {
-    return optionList.optionObject;
-  });
-
-  const deleteDocsFromDb = () => {
+  const deleteCurrentRoomInputsDb = () => {
     try {
-      optionsCollection?.map((optionObject) => {
+      roomInputsDb?.map((optionObject) => {
         firebase
           .firestore()
-          .collection(`${user.id}`)
+          .collection(`roomInputs: ${user.id}`)
           .doc(`${optionObject.id}`)
           .delete();
       });
@@ -33,18 +26,14 @@ export default function CreateRoom({
     }
   };
   //write question data to firestore database
-  const sendData = () => {
+  const addNewRoomDocument = () => {
     try {
-      questionCollection.map((questionObject) => {
-        if (questionObject.id == user.id) {
-          firebase
-            .firestore()
-            .collection("createRoom")
-            .doc(`${user.id}`)
-            .set({
-              question: { id: user.id, value: questionObject.value },
-            });
-        }
+      nameOfRoom?.map((nameOfRoomObject) => {
+        firebase
+          .firestore()
+          .collection("createRoom")
+          .doc(`${user.id}`)
+          .set({ id: user.id, value: nameOfRoomObject?.value });
       });
     } catch (error) {
       console.log(error);
@@ -52,15 +41,15 @@ export default function CreateRoom({
     }
   };
   //read question data id from firestore database and add to dynamic routing
-  const readData = () => {
+  const readRoomDocument = () => {
     try {
       firebase
         .firestore()
         .collection("createRoom")
         .doc(`${user.id}`)
         .onSnapshot(function (doc) {
-          const roomName = doc.data()?.question.id;
-          router.push(`/room/${roomName}?id=${roomName}`);
+          const roomID = doc.data()?.id;
+          router.push(`/room/${roomID}?id=${roomID}`);
         });
     } catch (error) {
       console.log(error);
@@ -70,30 +59,31 @@ export default function CreateRoom({
 
   return (
     <>
-      <section>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            sendData();
-            readData();
-          }}
-        >
-          <label>
-            <img src="/Icon/pencil-01.svg" width="25px" height="25px" />
-            <input
-              type="text"
-              name="createRoom"
-              placeholder="room id: question here"
-              onChange={(event) =>
-                updateQuestionCollection(user.id, event.target.value)
-              }
-            />
-          </label>
-          <button type="submit" onClick={deleteDocsFromDb}>
-            Create
-          </button>
-        </form>
-      </section>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          addNewRoomDocument();
+          readRoomDocument();
+          deleteCurrentRoomInputsDb();
+        }}
+      >
+        <label>
+          <img src="/Icon/pencil-01.svg" width="25px" height="25px" />
+          <input
+            type="text"
+            name="createRoom"
+            placeholder="add a name or message for your room"
+            onChange={(event) => {
+              event.preventDefault();
+              nameOfRoom[0].value = event.target.value;
+              setNameOfRoom(nameOfRoom);
+            }}
+          />
+        </label>
+        <button type="submit" className="buttonAnimation">
+          Create
+        </button>
+      </form>
     </>
   );
 }

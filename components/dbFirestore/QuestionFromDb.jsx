@@ -16,7 +16,7 @@ export default function QuestionFromDb({ roomID }) {
           .collection("createRoom")
           .doc(`${questionObject.id}`)
           .onSnapshot((doc) => {
-            const fetchedQuestion = doc.data()?.question.value;
+            const fetchedQuestion = doc.data()?.value;
             updateQuestionCollection(questionObject.id, fetchedQuestion);
           });
       });
@@ -30,20 +30,16 @@ export default function QuestionFromDb({ roomID }) {
         if (questionObject.id == roomID) {
           return (
             <StyledSection key={questionObject.id}>
-              <p>
-                <span>
-                  ROOM-ID   <CopyToClipboard text={questionObject.id}>
-                    <img
-                      src="/Icon/copy.svg"
-                      alt="copy room id"
-                      onClick={() => alert("copied")}
-                    />
-                  </CopyToClipboard> </span> <span>{questionObject.id}
-               
-                </span>
-              </p>
-
-              <p>{questionObject.value}?</p>
+              <span>
+                Room: {questionObject?.value}
+                <CopyToClipboard text={questionObject.id}>
+                  <img
+                    src="/Icon/copy.svg"
+                    alt="copy room id"
+                    onClick={() => alert("copied")}
+                  />
+                </CopyToClipboard>
+              </span>
             </StyledSection>
           );
         }
@@ -52,18 +48,18 @@ export default function QuestionFromDb({ roomID }) {
   );
 }
 
-const StyledSection = styled.section`
-  border: 1.5px solid var(--fixed-color-one);
-  border-radius: 25px;
-  color: var(--fixed-color-one);
-  background-color: var(--fixed-background);
-  width: 60vw;
+const StyledSection = styled.p`
+  font-size: 2vh;
   margin: 0 auto;
-  padding: 1vh 5vw;
+  padding: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   span {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--fixed-color-two);
+    gap: 20px;
+    color: var(--fixed-color-one);
   }
 `;

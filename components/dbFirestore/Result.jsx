@@ -1,59 +1,84 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
-import styled from "styled-components";
 import QuestionFromDb from "./QuestionFromDb";
-import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
 export default function Result({
-  optionsCollection,
-  updateCountYes,
-  updateCountNo,
+  roomInputsDb,
   roomID,
+  votes,
+  handleToggleBack,
+  handleToggleForward,
 }) {
-  // update current voting status
-  useEffect(() => {
-    try {
-      optionsCollection?.map((optionObject) => {
-        firebase
-          .firestore()
-          .collection(`${roomID}`)
-          .doc(`${optionObject.id}`)
-          .onSnapshot((doc) => {
-            const yesSir = doc.data()?.optionObject.countYes;
-            const noSir = doc.data()?.optionObject.countNo;
-            updateCountYes(optionObject.id, yesSir);
-            updateCountNo(optionObject.id, noSir);
-          });
-      });
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
-  }, [`${optionsCollection}`]);
-
   return (
     <>
-      <QuestionFromDb roomID={roomID} />
-      <StyledSection>
+      <div className="buttonGroup">
+        <QuestionFromDb roomID={roomID} />
+        <div>
+          <button
+            onClick={() => {
+              handleToggleBack();
+              handleToggleForward();
+            }}
+          >
+            Create
+          </button>
+
+          <button onClick={handleToggleForward}>Vote</button>
+        </div>
+      </div>
+
+      <section>
         <Bar
+          className="barChart"
           data={{
-            labels: optionsCollection?.map(({ value }) => value),
+            labels: roomInputsDb?.map((optionObject) => optionObject.value),
             datasets: [
               {
                 label: "yes",
-                data: optionsCollection?.map(({ countYes }) => countYes),
-                backgroundColor: "#56a8e1",
-                borderColor: "#56a8e1",
+                data: roomInputsDb?.map(
+                  (optionObject) =>
+                    votes
+                      ?.map((vote) => vote)
+                      .filter(
+                        (yes) =>
+                          yes[`${optionObject.id}`]?.vote === "yes" &&
+                          yes[`${optionObject.id}`]?.id === optionObject.id
+                      ).length
+                ),
+                backgroundColor: [
+                  "rgba(255, 99, 133, 0.797)",
+                  "rgba(54, 163, 235, 0.797)",
+                  "rgba(255, 207, 86, 0.797)",
+                  "rgba(75, 192, 192, 0.797)",
+                  "rgba(153, 102, 255, 0.797)",
+                  "rgba(255, 160, 64, 0.797)",
+                ],
+
                 color: "#606060",
                 borderWidth: 2,
                 borderRadius: 20,
               },
               {
                 label: "no",
-                data: optionsCollection?.map(({ countNo }) => countNo),
-                backgroundColor: "#56a7e14e",
-                borderColor: "#56a7e14e",
+                data: roomInputsDb?.map(
+                  (optionObject) =>
+                    votes
+                      ?.map((vote) => vote)
+                      .filter(
+                        (no) =>
+                          no[`${optionObject.id}`]?.vote === "no" &&
+                          no[`${optionObject.id}`]?.id === optionObject.id
+                      ).length
+                ),
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
                 color: "#606060",
                 borderWidth: 2,
                 borderRadius: 20,
@@ -63,8 +88,11 @@ export default function Result({
           options={{
             maintainAspectRatio: false,
             indexAxis: "y",
-            datasets: {
-              display: false,
+            legend: {
+              labels: {
+                backgroundColor: "blue",
+                fontSize: 25,
+              },
             },
             scales: {
               y: {
@@ -79,21 +107,9 @@ export default function Result({
                 },
               },
             },
-            plugins: {
-              legend: {
-                labels: {
-                  boxWidth: 10,
-                },
-              },
-            },
           }}
         />
-      </StyledSection>
+      </section>
     </>
   );
 }
-
-const StyledSection = styled.section`
-  height: 55vh;
-  margin: 1vh auto;
-`;

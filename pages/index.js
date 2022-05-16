@@ -10,13 +10,14 @@ export default function Index() {
       <Head>
         <title>Login</title>
       </Head>
-      <Header
-        pageName={"DECISIONS"}
-        subHeader={"VOTE WITH ME"}
-        className="onlyIndex"
-      />
+
       <Main>
         <section>
+          <Header
+            pageName={"DECISIONS"}
+            subHeader={"VOTE WITH ME"}
+            className="onlyIndex"
+          />
           <img src="/Icon/Waage-01.svg" width="150px" height="150px" />
         </section>
         <SignInScreen />
@@ -26,8 +27,8 @@ export default function Index() {
 }
 
 const Main = styled.main`
-  background: var(--fixed-background);
   height: 100vh;
+  background: linear-gradient(var(--fixed-background), var(--fixed-color-two));
   section {
     margin-bottom: 10vh;
     img {

@@ -21,18 +21,53 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    background: #ecececfd;
-  
   };
 
   body::-webkit-scrollbar{
     display:none;
   }
 
-  a{
-    color: #56a8e1;
-    display:flex;
-    align-items:center;
-  };
+
+  li{
+    list-style-type: none;
+  }
+
+  .buttonAnimation {
+    all: unset;
+    border-radius: 5px;
+    border: 5px solid var(--fixed-color-two);
+    font-size: 1.25rem;
+    padding: 1vh 5vw;
+    margin: 1rem auto;
+    background-color: var(--fixed-color-two);
+    color: var(--fixed-background);
+    letter-spacing: 2px;
+    position: relative;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .buttonAnimation:after {
+    content: "";
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 390%;
+    margin-left: -100% !important;
+    margin-top: -130%;
+    opacity: 0;
+    transition: all 0.8s;
+    background:var(--fixed-background);
+    color: var(--fixed-color-two)
+  }
+
+  .buttonAnimation:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
 
 `;

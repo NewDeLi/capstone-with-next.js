@@ -10,8 +10,8 @@ export const Navigation = () => {
             <img
               src="/Icon/Home_grey.svg"
               alt="home"
-              width="50px"
-              height="50px"
+              width="30vh"
+              height="30vh"
             />
           </a>
         </Link>
@@ -22,8 +22,8 @@ export const Navigation = () => {
             <img
               src="/Icon/Logout-01.svg"
               alt="home"
-              width="50px"
-              height="50px"
+              width="30vw"
+              height="30vh"
             />
           </a>
         </Link>
@@ -32,20 +32,24 @@ export const Navigation = () => {
   );
 };
 
-//styled-components
-
 const StyledNav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30vw;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100vw;
-  margin: 2vh auto 0 auto;
-  border-radius: 5px;
-  box-shadow: 0px 0px 16px var(--fixed-color-one);
-  background-color: var(--fixed-background);
-  height: 11vh;
+  padding: 1vh;
+  margin: 1vh auto;
   z-index: 2;
+  a {
+    background: var(--fixed-background);
+    border-radius: 5px;
+    border: 1.5px solid var(--fixed-color-two);
+    padding: 1vh;
+    box-shadow: 0px 0px 20px 0px var(--fixed-background);
+    display:flex;
+    align-items: center;
+  }
 `;

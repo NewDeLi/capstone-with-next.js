@@ -1,30 +1,24 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import styled from "styled-components";
 import QuestionFromDb from "./QuestionFromDb";
 import firebase from "firebase/compat/app";
 
 export const OptionFormList = ({
   inputs,
   setInputs,
-  showCreate,
-  setShowCreate,
   roomID,
+  handleToggleBack,
+  handleToggleForward,
 }) => {
-  //handle value changes
-  const handleToggle = () => {
-    setShowCreate(!showCreate);
-  };
-
-  const sendInputValueToDb = async (id) => {
+  const sendInputValueToDb = async () => {
     try {
-      await inputs.map((optionObject) => {
-        if (optionObject.id == id) {
+      await inputs.map((input) => {
+        if (input.value !== "") {
           firebase
             .firestore()
-            .collection(`${roomID}`)
-            .doc(`${optionObject.id}`)
-            .set({ optionObject: optionObject });
+            .collection(`roomInputs: ${roomID}`)
+            .doc(`${input.id}`)
+            .set({ input });
         }
       });
     } catch (error) {
@@ -39,22 +33,19 @@ export const OptionFormList = ({
     const foundInput = inputs.find((input) => input.id === id);
     foundInput.value = value;
     setInputs([...inputs]);
-    sendInputValueToDb(id);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleToggle();
+    sendInputValueToDb();
+    setInputs([{ id: uuidv4(), value: "" }]);
   };
 
-  //handle form changes
-  const handleCreate = () => {
+  const handleAdd = () => {
     const id = uuidv4();
     const newOptionInput = {
       id,
       value: "",
-      countYes: 0,
-      countNo: 0,
     };
     setInputs([...inputs, newOptionInput]);
   };
@@ -65,13 +56,43 @@ export const OptionFormList = ({
 
   return (
     <>
-      <QuestionFromDb roomID={roomID} />
-      <StyledSection className="create">
-        <form onSubmit={handleSubmit}>
+      <div className="buttonGroup">
+        <QuestionFromDb roomID={roomID} />
+        <div>
+          <button onClick={handleToggleBack}>Vote</button>
+
+          <button
+            onClick={() => {
+              handleToggleForward();
+              handleToggleBack();
+            }}
+          >
+            Result
+          </button>
+        </div>
+      </div>
+      <div className="optionFormList">
+        <form>
+          <div className="card">
+            <div className="cardContent">
+              <ul>
+                {inputs.map((input) => (
+                  <li key={input.id}>{input.value}</li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              className="buttonAnimation"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Submit
+            </button>
+          </div>
           <ul>
             {inputs.map((input) => {
               return (
-                <StyledList key={input.id}>
+                <li key={input.id} className="inputListitem">
                   <img
                     src="/Icon/remove_white.svg"
                     alt="delete option"
@@ -80,7 +101,7 @@ export const OptionFormList = ({
                     onClick={() => handleRemove(input.id)}
                   />
                   <label>
-                    <ScreenReaderOnly>New option</ScreenReaderOnly>
+                    <span className="screenReaderOnly">New option</span>
                     <input
                       type="text"
                       placeholder="write Option here"
@@ -93,61 +114,14 @@ export const OptionFormList = ({
                     alt="add option"
                     width="25px"
                     height="25px"
-                    onClick={handleCreate}
+                    onClick={handleAdd}
                   />
-                </StyledList>
+                </li>
               );
             })}
           </ul>
-          <StyledButton type="submit">Vote</StyledButton>
         </form>
-      </StyledSection>
+      </div>
     </>
   );
 };
-const StyledSection = styled.section`
-  height: 100vh;
-  overflow-y: scroll;
-  ul {
-    padding: 0;
-  }
-`;
-const StyledList = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem 0 1rem 0;
-  input {
-    height: 2rem;
-    width: 50vw;
-    border: 1px solid var(--fixed-color-two);
-    border-radius: 5px;
-  }
-  img {
-    background-color: var(--fixed-color-two);
-    border-radius: 100%;
-  }
-`;
-const StyledButton = styled.button`
-  all: unset;
-  border-radius: 5px;
-  border: 5px solid var(--fixed-color-two);
-  font-size: 1.25rem;
-  width: 50vw;
-  margin: 1rem auto;
-  background-color: var(--fixed-color-two);
-  color: var(--fixed-background);
-  letter-spacing: 2px;
-`;
-
-const ScreenReaderOnly = styled.span`
-  display: inline-block;
-  border: 0;
-  clip: rect(0 0 0 0);
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  width: 1px;
-  font-size: 1px;
-`;
