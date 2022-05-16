@@ -17,8 +17,6 @@ const StyledHeader = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2;
-
   color: var(--fixed-color-one);
   &.onlyIndex {
     margin: 0 auto;

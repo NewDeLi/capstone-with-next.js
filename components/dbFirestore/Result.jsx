@@ -16,6 +16,7 @@ export default function Result({
         <QuestionFromDb roomID={roomID} />
         <div>
           <button
+            type="button"
             onClick={() => {
               handleToggleBack();
               handleToggleForward();
@@ -24,7 +25,9 @@ export default function Result({
             Create
           </button>
 
-          <button onClick={handleToggleForward}>Vote</button>
+          <button type="button" onClick={handleToggleForward}>
+            Vote
+          </button>
         </div>
       </div>
 

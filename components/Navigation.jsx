@@ -49,7 +49,7 @@ const StyledNav = styled.nav`
     border: 1.5px solid var(--fixed-color-two);
     padding: 1vh;
     box-shadow: 0px 0px 20px 0px var(--fixed-background);
-    display:flex;
+    display: flex;
     align-items: center;
   }
 `;

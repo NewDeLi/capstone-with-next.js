@@ -85,11 +85,11 @@ const StyledMain = styled.main`
     border-radius: 25px;
     background-color: white;
     width: 80vw;
-    height: 50vh;
+    min-height: 50vh;
     padding: 1vh 1vw;
     position: sticky;
     top: 0;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 10vh auto;
   }
 
   img {
@@ -102,19 +102,24 @@ const StyledMain = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10vh auto;
+    margin: 5vh auto;
   }
   input {
-    height: 4vh;
     width: 40vw;
-    height: 5vh;
+    min-height: 5vh;
     border: 1px solid var(--fixed-color-two);
     border-radius: 5px;
     margin: 0 auto 2.5vh auto;
   }
+  textarea {
+    width: 40vw;
+    min-height: 7vh;
+    border: 1px solid var(--fixed-color-two);
+    border-radius: 5px;
+  }
   .toggleButtonGroup {
     button {
-      font-size: 1.25rem;
+      font-size: 2vh;
       width: 30vw;
       letter-spacing: 2px;
       padding: 0;

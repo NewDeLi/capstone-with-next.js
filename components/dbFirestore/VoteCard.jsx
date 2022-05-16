@@ -14,9 +14,13 @@ export default function VoteCard({
       <div className="buttonGroup">
         <QuestionFromDb roomID={roomID} />
         <div>
-          <button onClick={handleToggleBack}>Create</button>
+          <button type="button" onClick={handleToggleBack}>
+            Create
+          </button>
 
-          <button onClick={handleToggleForward}>Result</button>
+          <button type="button" onClick={handleToggleForward}>
+            Result
+          </button>
         </div>
       </div>
       <Advanced roomInputsDb={roomInputsDb} user={user} />

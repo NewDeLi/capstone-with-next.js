@@ -59,9 +59,12 @@ export const OptionFormList = ({
       <div className="buttonGroup">
         <QuestionFromDb roomID={roomID} />
         <div>
-          <button onClick={handleToggleBack}>Vote</button>
+          <button type="button" onClick={handleToggleBack}>
+            Vote
+          </button>
 
           <button
+            type="button"
             onClick={() => {
               handleToggleForward();
               handleToggleBack();
@@ -83,6 +86,7 @@ export const OptionFormList = ({
             </div>
 
             <button
+              type="button"
               className="buttonAnimation"
               onClick={(event) => handleSubmit(event)}
             >
@@ -93,29 +97,31 @@ export const OptionFormList = ({
             {inputs.map((input) => {
               return (
                 <li key={input.id} className="inputListitem">
-                  <img
-                    src="/Icon/remove_white.svg"
-                    alt="delete option"
-                    width="25px"
-                    height="25px"
-                    onClick={() => handleRemove(input.id)}
-                  />
+                  <button type="button" onClick={() => handleRemove(input.id)}>
+                    <img
+                      src="/Icon/remove_white.svg"
+                      alt="delete option"
+                      width="25px"
+                      height="25px"
+                    />
+                  </button>
                   <label>
-                    <span className="screenReaderOnly">New option</span>
+                    <span className="screenReaderOnly">New Vote</span>
                     <input
                       type="text"
-                      placeholder="write Option here"
+                      placeholder="add something to vote"
                       onChange={(event) => handleOnChange(event, input.id)}
                       value={input.value}
                     />
                   </label>
-                  <img
-                    src="/Icon/add_white.svg"
-                    alt="add option"
-                    width="25px"
-                    height="25px"
-                    onClick={handleAdd}
-                  />
+                  <button type="button" onClick={handleAdd}>
+                    <img
+                      src="/Icon/add_white.svg"
+                      alt="add option"
+                      width="25px"
+                      height="25px"
+                    />
+                  </button>
                 </li>
               );
             })}

@@ -127,7 +127,7 @@ const Section = styled.section`
   justify-content: center;
 
   .buttonGroup {
-    width: 60vw;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     position: sticky;
@@ -138,18 +138,30 @@ const Section = styled.section`
     border: 1px solid var(--fixed-color-two);
     box-shadow: 0px 0px 20px 0px var(--fixed-color-two);
     button {
-      all: unset;
+      border: none;
       font-size: 2vh;
       width: 20vw;
       border-radius: 5px;
-      margin: 1rem auto;
+      margin: 5vw;
+      padding: 1vh;
       letter-spacing: 2px;
+      text-align: center;
+      background: var(--fixed-color-two);
+      color: var(--fixed-background);
+      text-decoration: none;
+      -webkit-transition-duration: 0.8s; /* Safari */
+      transition-duration: 0.8s;
+    }
+
+    button:hover {
       text-decoration: underline;
+      background: var(--fixed-background);
+      color: var(--fixed-color-two);
     }
   }
 
   form {
-    margin: 10vh auto;
+    margin: 2vh auto 10vh auto;
     @media (min-width: 600px) {
       display: flex;
       justify-content: center;
@@ -176,8 +188,12 @@ const Section = styled.section`
       border-radius: 10px;
       border: 1px solid var(--fixed-color-one);
       box-shadow: 0px 0px 16px var(--fixed-background);
+      button {
+        border: none;
+        background: var(--fixed-background);
+      }
       input {
-        height: 4vh;
+        height: 5vh;
         border: 1px solid var(--fixed-color-two);
         border-radius: 5px;
       }
@@ -202,7 +218,7 @@ const Section = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background-color: var(--fixed-background);
     width: 80vw;
     max-width: 260px;

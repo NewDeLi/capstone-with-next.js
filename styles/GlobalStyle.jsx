@@ -33,7 +33,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .buttonAnimation {
-    all: unset;
     border-radius: 5px;
     border: 5px solid var(--fixed-color-two);
     font-size: 1.25rem;
@@ -43,31 +42,19 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--fixed-background);
     letter-spacing: 2px;
     position: relative;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.8s; /* Safari */
+    transition-duration: 0.8s;
     text-decoration: none;
-    overflow: hidden;
     cursor: pointer;
   }
-  .buttonAnimation:after {
-    content: "";
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 390%;
-    margin-left: -100% !important;
-    margin-top: -130%;
-    opacity: 0;
-    transition: all 0.8s;
-    background:var(--fixed-background);
-    color: var(--fixed-color-two)
+  .buttonAnimation:active{
+    border: 1px solid red;
+    border-color: black;
   }
 
-  .buttonAnimation:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
-  }
+  .buttonAnimation:hover {
+      background: var(--fixed-background);
+      color: var(--fixed-color-two);
+    }
 
 `;

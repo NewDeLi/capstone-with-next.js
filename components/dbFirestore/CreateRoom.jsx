@@ -69,10 +69,11 @@ export default function CreateRoom({
       >
         <label>
           <img src="/Icon/pencil-01.svg" width="25px" height="25px" />
-          <input
+          <textarea
             type="text"
             name="createRoom"
             placeholder="add a name or message for your room"
+            maxlength="100"
             onChange={(event) => {
               event.preventDefault();
               nameOfRoom[0].value = event.target.value;
