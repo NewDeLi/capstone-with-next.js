@@ -17,5 +17,7 @@ Each user can create a new question round, which others can join. In addition to
 
 Checkout [Decisions-Vote with me](https://capstone-with-next-js.vercel.app/) to see the Vercel Deployment of my App.
 
-## Design
-![Decisions-Vote with me](https://user-images.githubusercontent.com/85612831/157032915-03ba3060-7026-44fd-928f-1ef986272812.png)
+## Preview
+
+https://user-images.githubusercontent.com/85612831/169138268-7faa5e81-42b0-40a9-a493-7745a7ca07ec.mp4
+
